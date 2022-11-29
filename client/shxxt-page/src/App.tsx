@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import "./App.css";
-import Footer from "./components/UI/Footer/Footer";
-import Header from "./components/UI/Header/Header";
+import MainPage from "./components/MainPage";
+import Sidebar from "./components/UI/sidebar/Sidebar";
 
 const MainContainer = styled.div({
   width: "100vw",
@@ -13,8 +13,8 @@ const MainContainer = styled.div({
 function App() {
   return (
     <MainContainer>
-      <Header />
-      <Footer />
+      <Sidebar />
+      <MainPage />
     </MainContainer>
   );
 }
