@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import "./App.css";
 import MainPage from "./components/MainPage";
-import Sidebar from "./components/UI/sidebar/Sidebar";
+import Sidebar from "./components/UI/asdf/Sidebar";
 
 const MainContainer = styled.div({
   width: "100vw",
