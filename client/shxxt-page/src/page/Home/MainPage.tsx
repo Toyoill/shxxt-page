@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Content from "./page/Content";
-import Footer from "./UI/Footer/Footer";
-import Header from "./UI/Header/Header";
+import Content from "./Content";
+import Footer from "../../components/UI/Footer/Footer";
+import Header from "../../components/UI/Header/Header";
 
 const MainPageWrapper = styled.div({
   marginLeft: "10rem",

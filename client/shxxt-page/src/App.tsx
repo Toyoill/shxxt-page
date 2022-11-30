@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import MainPage from "./components/MainPage";
+import MainPage from "./page/Home/MainPage";
 import Sidebar from "./components/UI/Sidebar/Sidebar";
 
 const MainContainer = styled.div({
