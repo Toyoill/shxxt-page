@@ -1,20 +1,35 @@
 import React from "react";
 import styled from "styled-components";
 
-const SidebarContainer = styled.div({
-  position: "fixed",
-  top: 0,
-  left: 0,
-  width: "10rem",
-  height: "100%",
-  backgroundColor: "#aa0",
-  zIndex: 9,
-});
+import Toggle from "./Toggle";
+
+const SidebarContainer = styled.nav`
+  border: 1px solid black;
+  height: 100vh;
+  left: 0;
+  min-width: 15rem;
+  position: fixed;
+  width: 20vw;
+  z-index: 9;
+
+  & > ul {
+    margin: 0;
+    margin-left: 1.5rem;
+    margin-right: 3rem;
+    padding: 0;
+  }
+`;
 
 export default function Sidebar() {
   return (
-    <div>
-      <SidebarContainer />
-    </div>
+    <SidebarContainer>
+      <ul>
+        <Toggle title="myToggle">
+          <li>test1</li>
+          <li>test2</li>
+          <li>test3</li>
+        </Toggle>
+      </ul>
+    </SidebarContainer>
   );
 }
