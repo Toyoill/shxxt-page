@@ -23,5 +23,6 @@
   "include": [
     "src",
     ".eslintrc.js"
-  ]
+  ],
+  "typeRoots": ["src/types"],
 }
