@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+
+import useLongPress from "../../../../../util/useLongPress";
 
 interface Props {
   children: JSX.Element | string;
 }
 
-const SubjectContainer = styled.div`
+const SubjectContainer = styled.div<{
+  longPressed: boolean;
+}>`
+  background-color: ${(prop) => (prop.longPressed ? "#c1c1c1" : "#fff")};
+  box-sizing: border-box;
   cursor: pointer;
-  margin-left: 1rem;
-  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding-block: 0.2rem;
+  width: 100%;
+
+  & > div {
+    padding-left: 1rem;
+  }
 
   &:hover {
     text-decoration: underline;
@@ -16,5 +28,20 @@ const SubjectContainer = styled.div`
 `;
 
 export default function Subject({ children }: Props) {
-  return <SubjectContainer>{children}</SubjectContainer>;
+  const [longPressed, setLongPressed] = useState(false);
+
+  const { onMouseDown, onMouseLeave, onMouseUp } = useLongPress(() => {
+    setLongPressed((prev) => !prev);
+  }, 800);
+
+  return (
+    <SubjectContainer
+      longPressed={longPressed}
+      onMouseDown={onMouseDown}
+      onMouseLeave={onMouseLeave}
+      onMouseUp={onMouseUp}
+    >
+      <div>{children}</div>
+    </SubjectContainer>
+  );
 }

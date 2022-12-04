@@ -27,8 +27,16 @@ const EditBarContainer = styled.div`
 export default function EditBar() {
   return (
     <EditBarContainer>
+      <button type="button">#</button>
       <button type="button">+</button>
-      <button type="button">-</button>
+      <button
+        type="button"
+        onContextMenu={(evt) => {
+          evt.preventDefault();
+        }}
+      >
+        -
+      </button>
     </EditBarContainer>
   );
 }

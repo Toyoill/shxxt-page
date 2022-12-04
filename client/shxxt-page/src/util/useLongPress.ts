@@ -7,16 +7,22 @@ interface OnMouseProps {
 }
 
 export default function useLongPress(
-  callback: Function,
-  ms: number,
-  { mouseUpHandler, mouseDownHandler, mouseLeaveHandler }: OnMouseProps
+  callback: Function = () => {},
+  ms: number = 500,
+  { mouseUpHandler, mouseDownHandler, mouseLeaveHandler }: OnMouseProps = {}
 ) {
   const [pressed, setPressed] = useState(false);
 
   useEffect(() => {
-    let timerId;
+    let timerId: number = 0;
     if (pressed) timerId = setTimeout(callback, ms);
-    else clearTimeout(timerId);
+    else {
+      clearTimeout(timerId);
+    }
+
+    return () => {
+      clearTimeout(timerId);
+    };
   }, [pressed, callback, ms]);
 
   const buttonPressed = () => {

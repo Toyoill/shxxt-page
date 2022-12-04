@@ -8,6 +8,8 @@ export default function SideBarContents() {
     <>
       <Category title="Awesome Category">
         <Subject>Awesome Subject</Subject>
+        <Subject>Awesome Subject</Subject>
+        <Subject>Awesome Subject</Subject>
       </Category>
       <Category title="Awesome Category">
         <Subject>Awesome Subject</Subject>

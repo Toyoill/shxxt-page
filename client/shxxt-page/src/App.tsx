@@ -4,8 +4,8 @@ import React from "react";
 // import styled from "styled-components";
 // import MainPage from "./page/Home/MainPage";
 import Sidebar from "./components/UI/Sidebar/Admin/Sidebar";
-
 import Document from "./page/Document/Document";
+import Test from "./Test";
 
 // const MainContainer = styled.div({
 //   width: "100vw",
@@ -22,6 +22,7 @@ function App() {
     <>
       <Sidebar />
       <Document />
+      <Test />
     </>
   );
 }
