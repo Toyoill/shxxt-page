@@ -3,7 +3,7 @@ import React from "react";
 // 최종 commit 전 복구
 // import styled from "styled-components";
 // import MainPage from "./page/Home/MainPage";
-import Sidebar from "./components/UI/Sidebar/Admin/Sidebar";
+import Sidebar from "./components/UI/Sidebar/Sidebar";
 import Document from "./page/Document/Document";
 import Test from "./Test";
 

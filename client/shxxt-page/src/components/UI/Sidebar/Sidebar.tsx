@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import EditBar from "./EditBar";
-import SideBarContents from "./SideBarContents";
+import EditBar from "./Admin/EditBar";
+import Heading from "./Content/Heading";
 
 const SidebarContainer = styled.nav`
   border: 1px solid black;
@@ -18,7 +18,7 @@ export default function Sidebar() {
   return (
     <SidebarContainer>
       <EditBar />
-      <SideBarContents />
+      <Heading title="title" />
     </SidebarContainer>
   );
 }
