@@ -6,8 +6,9 @@ interface Props {
   canClick?: boolean;
 }
 
-const StyledSummary = styled.summary<{ canClick: boolean }>`
+const StyledDiv = styled.div<{ canClick: boolean }>`
   cursor: pointer;
+  display: inline-block;
   pointer-events: ${(props) => (props.canClick ? "true" : "false")};
 
   &:hover {
@@ -16,5 +17,5 @@ const StyledSummary = styled.summary<{ canClick: boolean }>`
 `;
 
 export default function Heading({ title, canClick = true }: Props) {
-  return <StyledSummary canClick={canClick}>{title}</StyledSummary>;
+  return <StyledDiv canClick={canClick}>{title}</StyledDiv>;
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import EditBar from "./Admin/EditBar";
-import Heading from "./Content/Heading";
+import List from "./List";
+import EditBar from "./EditBar";
 
 const SidebarContainer = styled.nav`
   border: 1px solid black;
@@ -12,13 +12,23 @@ const SidebarContainer = styled.nav`
   position: fixed;
   width: 20vw;
   z-index: 9;
+
+  & > ol {
+    margin: 0;
+    margin-top: 1rem;
+    padding-inline: 0.5rem;
+  }
 `;
 
 export default function Sidebar() {
   return (
     <SidebarContainer>
       <EditBar />
-      <Heading title="title" />
+      <ol>
+        <List />
+        <List />
+        <List />
+      </ol>
     </SidebarContainer>
   );
 }
