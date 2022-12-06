@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Example from "./Example";
 import Button from "../../components/UI/Button";
+import Features from "./Feature";
 
 const ContentContainer = styled.div({
   display: "flex",
@@ -44,8 +45,11 @@ export default function Content() {
       <BlueText>Shxxt-Maker</BlueText>
       <Info>데이터 관리를 더 쉽게.</Info>
       <Example />
-      <Button />
+      <Button title="Install 1.0.0" />
       <GreyText>Features</GreyText>
+      <Features />
+      <GreyText>로컬 데이터의 빠른 코드 변환, 지금 당장 시작하세요.</GreyText>
+      <Button title="Get Started!" />
     </ContentContainer>
   );
 }
