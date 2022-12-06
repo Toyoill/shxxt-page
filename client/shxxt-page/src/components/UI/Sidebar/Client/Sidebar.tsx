@@ -9,6 +9,7 @@ const SidebarContainer = styled.nav`
   left: 0;
   min-width: 15rem;
   position: fixed;
+  top: 0;
   width: 20vw;
   z-index: 9;
 

@@ -5,6 +5,7 @@ import React from "react";
 // import MainPage from "./page/Home/MainPage";
 import Sidebar from "./components/UI/Sidebar/Admin/Sidebar";
 import Document from "./page/Document/Document";
+import Test from "./MovingBox";
 // const MainContainer = styled.div({
 //   width: "100vw",
 //   height: 1000,
@@ -17,10 +18,11 @@ function App() {
     // <MainContainer>
     //   <MainPage />
     // </MainContainer>
-    <>
+    <div>
       <Sidebar />
       <Document />
-    </>
+      <Test />
+    </div>
   );
 }
 
