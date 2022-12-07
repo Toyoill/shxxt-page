@@ -1,16 +1,14 @@
 import React from "react";
 
-// 최종 commit 전 복구
-// import styled from "styled-components";
-// import MainPage from "./page/Home/MainPage";
+import styled from "styled-components";
+import MainPage from "./page/Home/MainPage";
 import Sidebar from "./components/UI/Sidebar/Admin/Sidebar";
-import Document from "./page/Document/Document";
-import Test from "./MovingBox";
-// const MainContainer = styled.div({
-//   width: "100vw",
-//   height: 1000,
-//   backgroundColor: "#333",
-// });
+
+const MainContainer = styled.div({
+  width: "100vw",
+  height: 1000,
+  backgroundColor: "#F5F2ED",
+});
 
 function App() {
   return (
