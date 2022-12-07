@@ -6,7 +6,7 @@ import Header from "../../components/UI/Header/Header";
 
 const MainPageWrapper = styled.div({
   // marginLeft: "10rem",
-  width: "100%",
+  width: "100wh",
   height: "100%",
   backgroundColor: "#0aa",
 });
