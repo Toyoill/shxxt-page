@@ -1,6 +1,7 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import styled from "styled-components";
+import GuidePage from "../../page/Guide/GuidePage";
 
 interface PropsType {
   title: string;
@@ -8,8 +9,8 @@ interface PropsType {
 
 const StyledButton = styled.button({
   marginTop: "2rem",
-  marginLeft: "auto",
-  marginRight: "auto",
+  // marginLeft: "auto",
+  // marginRight: "auto",
   display: "inline-flex",
   outline: "none",
   border: "none",
@@ -21,9 +22,15 @@ const StyledButton = styled.button({
   paddingRight: "1rem",
   paddingTop: "0.5rem",
   paddingBottom: "0.5rem",
+  width: "8.2rem",
   height: "2.25rem",
   fontSize: "1rem",
   background: "#228be6",
+});
+
+const StyledNav = styled.nav({
+  marginLeft: "auto",
+  marginRight: "auto",
 });
 
 function Button({ title }: PropsType) {
@@ -35,7 +42,19 @@ function Button({ title }: PropsType) {
   };
   */
 
-  return <StyledButton>{title}</StyledButton>;
+  return (
+    <BrowserRouter>
+      <StyledNav>
+        <Link to="/Guide">
+          <StyledButton>{title}</StyledButton>
+        </Link>
+      </StyledNav>
+
+      <Routes>
+        <Route path="/Guide" element={<GuidePage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default Button;

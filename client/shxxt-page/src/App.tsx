@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MainPage from "./page/Home/MainPage";
+// import GuidePage from "./page/Guide/GuidePage";
 // import Sidebar from "./components/UI/Sidebar/Sidebar";
 // import Test from "./Test";
 
