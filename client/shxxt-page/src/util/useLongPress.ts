@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export default function useLongPress(
   callback: Function = () => {},
@@ -19,13 +19,14 @@ export default function useLongPress(
     };
   }, [pressed, callback, ms]);
 
-  const buttonPressed = () => {
+  const buttonPressed = useCallback(() => {
     setPressed(true);
-  };
-  const buttonReleased = () => {
+  }, []);
+
+  const buttonReleased = useCallback(() => {
     setPressed(false);
     callback(false);
-  };
+  }, [callback]);
 
   return {
     onMouseDown: () => buttonPressed(),

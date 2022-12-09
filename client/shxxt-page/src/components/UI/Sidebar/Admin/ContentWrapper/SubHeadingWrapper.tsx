@@ -1,32 +1,34 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import styled, { CSSObject } from "styled-components";
 
-import useLongPress from "../../../../../util/useLongPress";
+import LongPressWrapper from "../../../../FunctionalWrapper/LongPressWrapper";
 
 interface Props {
   children: JSX.Element;
 }
 
-const Wrapper = styled.li<{ longPressed: boolean }>`
-  border-radius: 5px;
-  background-color: ${(props) => (props.longPressed ? "#c5c5c5" : "")};
-  box-sizing: border-box;
-  display: inline-block;
-  padding-block: 0.2rem;
+const Wrapper = styled.li`
+  list-style: none;
   width: 100%;
 `;
 
 export default function SubHeadingWrapper({ children }: Props) {
-  const [longPressed, setLongPressed] = useState(false);
-
-  const longPress = useLongPress((pressed: boolean) => {
-    setLongPressed(pressed);
-  }, 800);
+  const defaultStyle: CSSObject = {
+    borderRadius: "5px",
+    height: "100%",
+    paddingBlock: "0.2rem",
+    width: "100%",
+  };
+  const eventStyle: CSSObject = {
+    backgroundColor: "#cbcbcb",
+  };
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper longPressed={longPressed} {...longPress}>
-      {children}
+    <Wrapper>
+      <LongPressWrapper defaultStyle={defaultStyle} eventStyle={eventStyle}>
+        {children}
+      </LongPressWrapper>
     </Wrapper>
   );
 }

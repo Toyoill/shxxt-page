@@ -1,37 +1,42 @@
-import React from "react";
-import styled from "styled-components";
-
-import useLongPress from "../../../../../util/useLongPress";
+import React, { MouseEventHandler } from "react";
+import styled, { CSSObject } from "styled-components";
+import LongPressWrapper from "../../../../FunctionalWrapper/LongPressWrapper";
 
 interface Props {
-  longPressed: boolean;
-  onLongPress: Function;
   children: JSX.Element;
+  clickHandler: MouseEventHandler;
+  longPressHandler: (longPressed: boolean) => void;
 }
 
-const Wrapper = styled.summary<{ longPressed: boolean }>`
-  border-radius: 5px;
-  box-sizing: border-box;
-  padding-block: 0.2rem;
+const Wrapper = styled.div`
   width: 100%;
-
-  pointer-events: ${(props) => (props.longPressed ? "none" : "")};
 `;
 
 export default function HeadingWrapper({
-  longPressed,
-  onLongPress,
   children,
+  clickHandler,
+  longPressHandler,
 }: Props) {
-  const longPress = useLongPress(
-    (pressed: boolean) => onLongPress(pressed),
-    800
-  );
+  const defaultStyle: CSSObject = {
+    borderRadius: "5px",
+    height: "100%",
+    paddingBlock: "0.2rem",
+    width: "100%",
+  };
+  const eventStyle: CSSObject = {
+    backgroundColor: "#cbcbcb",
+  };
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper longPressed={longPressed} {...longPress}>
-      {children}
+    <Wrapper onClick={clickHandler}>
+      <LongPressWrapper
+        defaultStyle={defaultStyle}
+        eventStyle={eventStyle}
+        longPressHandler={longPressHandler}
+      >
+        {children}
+      </LongPressWrapper>
     </Wrapper>
   );
 }
