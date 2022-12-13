@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ContextMenu from "./ContextMenu";
 
 import SidebarInner from "./SidebarInner";
 
@@ -18,6 +19,7 @@ const SidebarContainer = styled.nav`
 export default function Sidebar() {
   return (
     <SidebarContainer>
+      <ContextMenu />
       <SidebarInner />
     </SidebarContainer>
   );

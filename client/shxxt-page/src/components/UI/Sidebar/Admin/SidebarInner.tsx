@@ -27,6 +27,8 @@ export default function SidebarInner() {
     updateHandler();
   };
 
+  if (false) addHandler("Heading");
+
   const contents = datas.map((data) => {
     if (data.type === "Heading") return <List key={data.idx} content={data} />;
     return (

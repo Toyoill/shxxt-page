@@ -30,8 +30,10 @@ export default function List({ content }: Props) {
   const canOpen = useRef(false);
 
   const longPressHandler = (longPressed: boolean) => {
-    if (longPressed) canOpen.current = true;
-    setSelected(longPressed);
+    if (longPressed) {
+      canOpen.current = true;
+      setSelected(true);
+    }
   };
 
   const clickHandler = () => {
