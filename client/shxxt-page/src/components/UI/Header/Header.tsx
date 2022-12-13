@@ -16,11 +16,10 @@ const HeaderContainer = styled.div`
   top: 0;
   width: 100%;
   height: 10rem;
-  background-color: "black";
+  background-color: #7c5fe6;
   .wrapper {
     display: flex;
     width: 96%;
-    max-width: "1100px";
     height: 100%;
     margin: 0 auto;
     align-items: center;
