@@ -7,11 +7,11 @@ export interface Content {
 }
 
 export default class SidebarData {
-  private datas: Array<Content> = [];
+  private static datas: Array<Content> = [];
 
-  private updatedDatas: Array<Content> = [];
+  private static updatedDatas: Array<Content> = [];
 
-  public getData() {
+  public static getData() {
     return [...this.datas];
   }
 
@@ -21,7 +21,7 @@ export default class SidebarData {
 
   // public deleteContent(target: Positoin) {}
 
-  public addContent(type: "Heading" | "SubHeading", target?: number) {
+  public static addContent(type: "Heading" | "SubHeading", target?: number) {
     if (type === "Heading") {
       const newData: Content = {
         type,

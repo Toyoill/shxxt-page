@@ -17,13 +17,12 @@ const Wrapper = styled.div`
 `;
 
 export default function SidebarInner() {
-  const sidebarData = useRef(new SidebarData()).current;
   const [datas, setDatas] = useState<Array<Content>>([]);
 
   const updateHandler = () => setDatas(sidebarData.getData());
 
   const addHandler = (type: "Heading" | "SubHeading") => {
-    sidebarData.addContent(type);
+    SidebarData.addContent(type);
     updateHandler();
   };
 
