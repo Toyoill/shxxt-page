@@ -1,15 +1,19 @@
-import React, { MouseEventHandler } from "react";
+import React, { MouseEvent } from "react";
 import styled, { CSSObject } from "styled-components";
+
 import LongPressWrapper from "../../../../FunctionalWrapper/LongPressWrapper";
+// import DragWrapper from "../../../../FunctionalWrapper/DragWrapper";
 
 interface Props {
-  children: JSX.Element;
-  clickHandler: MouseEventHandler;
+  children: JSX.Element | Array<JSX.Element>;
+  clickHandler: (event: MouseEvent) => void;
   longPressHandler: (longPressed: boolean) => void;
 }
 
-const Wrapper = styled.div`
-  width: 100%;
+const ClickWrapper = styled.div`
+  align-items: center;
+  width: max-content;
+  display: flex;
 `;
 
 export default function HeadingWrapper({
@@ -19,24 +23,20 @@ export default function HeadingWrapper({
 }: Props) {
   const defaultStyle: CSSObject = {
     borderRadius: "5px",
-    height: "100%",
     paddingBlock: "0.2rem",
     width: "100%",
-  };
-  const eventStyle: CSSObject = {
-    backgroundColor: "#cbcbcb",
   };
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper onClick={clickHandler}>
-      <LongPressWrapper
-        defaultStyle={defaultStyle}
-        eventStyle={eventStyle}
-        longPressHandler={longPressHandler}
-      >
-        {children}
-      </LongPressWrapper>
-    </Wrapper>
+
+    <LongPressWrapper
+      defaultStyle={defaultStyle}
+      longPressHandler={longPressHandler}
+    >
+      {/* <DragWrapper> */}
+      <ClickWrapper onClick={clickHandler}>{children}</ClickWrapper>
+      {/* </DragWrapper> */}
+    </LongPressWrapper>
   );
 }

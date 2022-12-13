@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import List from "./List";
-import EditBar from "./EditBar";
+import SidebarInner from "./SidebarInner";
 
 const SidebarContainer = styled.nav`
   border: 1px solid black;
@@ -24,12 +23,7 @@ const SidebarContainer = styled.nav`
 export default function Sidebar() {
   return (
     <SidebarContainer>
-      <EditBar />
-      <ol>
-        <List />
-        <List />
-        <List />
-      </ol>
+      <SidebarInner />
     </SidebarContainer>
   );
 }
