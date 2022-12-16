@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import ContextMenu from "./ContextMenu";
+import SidebarData from "../data/sidebarData";
 
 import SidebarInner from "./SidebarInner";
 
 const SidebarContainer = styled.nav`
   border: 1px solid black;
   height: 100vh;
-  left: 0;
+  left: 0px;
   max-width: 20rem;
   min-width: 15rem;
   position: fixed;
@@ -17,9 +17,13 @@ const SidebarContainer = styled.nav`
 `;
 
 export default function Sidebar() {
+  SidebarData.addContent("Heading");
+  SidebarData.addContent("Heading");
+  SidebarData.addContent("Heading");
+  console.log(SidebarData.getData());
+
   return (
     <SidebarContainer>
-      <ContextMenu />
       <SidebarInner />
     </SidebarContainer>
   );

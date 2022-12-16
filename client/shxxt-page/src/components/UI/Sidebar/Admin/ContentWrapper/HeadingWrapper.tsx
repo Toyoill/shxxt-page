@@ -2,13 +2,16 @@ import React, { MouseEvent } from "react";
 import styled, { CSSObject } from "styled-components";
 
 import LongPressWrapper from "../../../../FunctionalWrapper/LongPressWrapper";
-// import DragWrapper from "../../../../FunctionalWrapper/DragWrapper";
 
 interface Props {
   children: JSX.Element | Array<JSX.Element>;
   clickHandler: (event: MouseEvent) => void;
   longPressHandler: (longPressed: boolean) => void;
 }
+
+const Wrapper = styled.div`
+  width: 100%;
+`;
 
 const ClickWrapper = styled.div`
   align-items: center;
@@ -29,14 +32,13 @@ export default function HeadingWrapper({
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-
-    <LongPressWrapper
-      defaultStyle={defaultStyle}
-      longPressHandler={longPressHandler}
-    >
-      {/* <DragWrapper> */}
-      <ClickWrapper onClick={clickHandler}>{children}</ClickWrapper>
-      {/* </DragWrapper> */}
-    </LongPressWrapper>
+    <Wrapper>
+      <LongPressWrapper
+        defaultStyle={defaultStyle}
+        longPressHandler={longPressHandler}
+      >
+        <ClickWrapper onClick={clickHandler}>{children}</ClickWrapper>
+      </LongPressWrapper>
+    </Wrapper>
   );
 }

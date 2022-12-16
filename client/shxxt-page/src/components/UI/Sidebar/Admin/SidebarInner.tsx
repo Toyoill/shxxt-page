@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import SidebarData, { Content } from "../data/sidebarData";
@@ -19,7 +19,11 @@ const Wrapper = styled.div`
 export default function SidebarInner() {
   const [datas, setDatas] = useState<Array<Content>>([]);
 
-  const updateHandler = () => setDatas(sidebarData.getData());
+  const updateHandler = () => setDatas(SidebarData.getData());
+
+  useEffect(() => {
+    updateHandler();
+  }, []);
 
   const addHandler = (type: "Heading" | "SubHeading") => {
     SidebarData.addContent(type);

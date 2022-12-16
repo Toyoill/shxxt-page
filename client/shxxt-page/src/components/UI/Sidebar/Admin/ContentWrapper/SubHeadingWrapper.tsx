@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import LongPressWrapper from "../../../../FunctionalWrapper/LongPressWrapper";
-// import DragWrapper, { Change } from "../../../../FunctionalWrapper/DragWrapper";
+import OutsideClickWrapper from "../../../../FunctionalWrapper/OutsideClickWrapper";
 
 interface Props {
   children: JSX.Element;
@@ -25,14 +25,21 @@ export default function SubHeadingWrapper({ children }: Props) {
 
   const contextMenuHandler = () => {};
 
+  const outsideClickHandler = () => {
+    setSelected(false);
+  };
+
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper selected={selected} onContextMenu={contextMenuHandler}>
-      <LongPressWrapper longPressHandler={longPressHandler}>
-        {/* <DragWrapper onMouseDrag={mouseDragHandler} onMouseUp={mouseUpHandler}> */}
-        {children}
-        {/* </DragWrapper> */}
-      </LongPressWrapper>
+      <OutsideClickWrapper
+        check={selected}
+        outsideClickHandler={outsideClickHandler}
+      >
+        <LongPressWrapper longPressHandler={longPressHandler}>
+          {children}
+        </LongPressWrapper>
+      </OutsideClickWrapper>
     </Wrapper>
   );
 }

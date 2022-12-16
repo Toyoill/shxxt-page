@@ -7,6 +7,7 @@ import Heading from "../Content/Heading";
 import SubHeadingWrapper from "./ContentWrapper/SubHeadingWrapper";
 import SubHeading from "../Content/SubHeading";
 import Icon from "../Content/Icon";
+import OutsideClickWrapper from "../../../FunctionalWrapper/OutsideClickWrapper";
 
 interface Props {
   content: Content;
@@ -38,7 +39,11 @@ export default function List({ content }: Props) {
 
   const clickHandler = () => {
     if (canOpen.current) canOpen.current = false;
-    else setOpen((prev) => !prev);
+    if (!selected) setOpen((prev) => !prev);
+  };
+
+  const outsideClickHandler = () => {
+    setSelected(false);
   };
 
   const subHeadings = content.subHeadings?.map((subHeading) => (
@@ -51,14 +56,19 @@ export default function List({ content }: Props) {
 
   return (
     <ListWrapper open={open} selected={selected}>
-      <HeadingWrapper
-        longPressHandler={longPressHandler}
-        clickHandler={clickHandler}
+      <OutsideClickWrapper
+        check={selected}
+        outsideClickHandler={outsideClickHandler}
       >
-        <Icon open={open} />
-        <Heading title={content.main} />
-      </HeadingWrapper>
-      <ol>{subHeadings}</ol>
+        <HeadingWrapper
+          longPressHandler={longPressHandler}
+          clickHandler={clickHandler}
+        >
+          <Icon open={open} />
+          <Heading title={content.main} />
+        </HeadingWrapper>
+        <ol>{subHeadings}</ol>
+      </OutsideClickWrapper>
     </ListWrapper>
   );
 }
