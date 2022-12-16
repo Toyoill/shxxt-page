@@ -35,10 +35,14 @@ export default function SidebarInner() {
   const contents = datas.map((data) => {
     if (data.type === "Heading") return <List key={data.idx} content={data} />;
     return (
-      <SubHeadingWrapper key={data.idx}>
-        <SubHeading idx={data.idx} belongTo={data.belongTo}>
-          {data.main}
-        </SubHeading>
+      <SubHeadingWrapper
+        key={data.idx}
+        parentContextHandler={() => {}}
+        parentSelected={false}
+        idx={data.idx}
+        belongTo={data.belongTo}
+      >
+        <SubHeading>{data.main}</SubHeading>
       </SubHeadingWrapper>
     );
   });

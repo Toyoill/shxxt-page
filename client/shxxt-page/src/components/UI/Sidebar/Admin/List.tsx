@@ -11,6 +11,7 @@ import OutsideClickWrapper from "../../../FunctionalWrapper/OutsideClickWrapper"
 
 import { useAppDispatch } from "../../../../store/hooks";
 import { openContext } from "../../../../store/sidebar/contextReducer";
+import { select, unselect } from "../../../../store/sidebar/selectReducer";
 
 interface Props {
   content: Content;
@@ -35,15 +36,26 @@ export default function List({ content }: Props) {
 
   const dispatch = useAppDispatch();
 
+  const selectHandler = () => {
+    dispatch(
+      select({
+        type: "Heading",
+        idx: content.idx,
+      })
+    );
+  };
+
   const longPressHandler = (longPressed: boolean) => {
     if (longPressed) {
       canOpen.current = true;
       setSelected(true);
+      selectHandler();
     }
   };
 
   const contextMenuHandler = (evt: MouseEvent) => {
     dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
+    selectHandler();
   };
 
   const clickHandler = () => {
@@ -53,13 +65,18 @@ export default function List({ content }: Props) {
 
   const outsideClickHandler = () => {
     setSelected(false);
+    dispatch(unselect());
   };
 
   const subHeadings = content.subHeadings?.map((subHeading) => (
-    <SubHeadingWrapper key={subHeading.idx}>
-      <SubHeading idx={subHeading.idx} belongTo={subHeading.belongTo}>
-        {subHeading.main}
-      </SubHeading>
+    <SubHeadingWrapper
+      key={subHeading.idx}
+      parentSelected={selected}
+      parentContextHandler={contextMenuHandler}
+      idx={subHeading.idx}
+      belongTo={subHeading.belongTo}
+    >
+      <SubHeading>{subHeading.main}</SubHeading>
     </SubHeadingWrapper>
   ));
 
