@@ -37,6 +37,7 @@ export default function LongPressWrapper({
     <Wrapper
       defaultStyle={defaultStyle || {}}
       eventStyle={(longPressed && eventStyle) || {}}
+      onContextMenu={(evt) => evt.preventDefault()}
       {...longPress}
     >
       {children}

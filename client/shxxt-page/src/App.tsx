@@ -1,8 +1,11 @@
 import React from "react";
+import { Provider } from "react-redux";
 
 import styled from "styled-components";
 // import MainPage from "./page/Home/MainPage";
 import Sidebar from "./components/UI/Sidebar/Admin/SidebarWrapper";
+
+import store from "./store/rootReducer";
 
 const MainContainer = styled.div({
   width: "100vw",
@@ -13,9 +16,11 @@ const MainContainer = styled.div({
 function App() {
   return (
     // 최종 commit 전 되돌릴 코드
-    <MainContainer>
-      <Sidebar />
-    </MainContainer>
+    <Provider store={store}>
+      <MainContainer>
+        <Sidebar />
+      </MainContainer>
+    </Provider>
     /*
     <div>
       <Sidebar />

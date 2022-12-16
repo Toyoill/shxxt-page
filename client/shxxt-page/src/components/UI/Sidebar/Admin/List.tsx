@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { MouseEvent, useRef, useState } from "react";
 import styled from "styled-components";
 
 import { Content } from "../data/sidebarData";
@@ -8,6 +8,9 @@ import SubHeadingWrapper from "./ContentWrapper/SubHeadingWrapper";
 import SubHeading from "../Content/SubHeading";
 import Icon from "../Content/Icon";
 import OutsideClickWrapper from "../../../FunctionalWrapper/OutsideClickWrapper";
+
+import { useAppDispatch } from "../../../../store/hooks";
+import { openContext } from "../../../../store/sidebar/contextReducer";
 
 interface Props {
   content: Content;
@@ -30,11 +33,17 @@ export default function List({ content }: Props) {
   const [selected, setSelected] = useState(false);
   const canOpen = useRef(false);
 
+  const dispatch = useAppDispatch();
+
   const longPressHandler = (longPressed: boolean) => {
     if (longPressed) {
       canOpen.current = true;
       setSelected(true);
     }
+  };
+
+  const contextMenuHandler = (evt: MouseEvent) => {
+    dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
   };
 
   const clickHandler = () => {
@@ -55,7 +64,11 @@ export default function List({ content }: Props) {
   ));
 
   return (
-    <ListWrapper open={open} selected={selected}>
+    <ListWrapper
+      open={open}
+      selected={selected}
+      onContextMenu={contextMenuHandler}
+    >
       <OutsideClickWrapper
         check={selected}
         outsideClickHandler={outsideClickHandler}
