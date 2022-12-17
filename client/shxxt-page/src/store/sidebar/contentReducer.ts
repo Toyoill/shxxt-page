@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { CaseReducer, createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 import { Content } from "../type";
 
 interface State {
@@ -23,7 +22,7 @@ const addDataAction: CaseReducer<
     const newData: Content = {
       type,
       idx: state.datas.length,
-      main: "new Heading",
+      main: `Heading${state.datas.length}`,
     };
 
     state.updatedData.push(newData);
@@ -40,7 +39,7 @@ const addDataAction: CaseReducer<
     const newData: Content = {
       type,
       idx: newIdx,
-      main: "new SubHeading",
+      main: `SubHeading${newIdx}`,
     };
 
     if (target !== undefined) {
@@ -48,7 +47,49 @@ const addDataAction: CaseReducer<
       state.datas[target].subHeadings?.push(newData);
     } else state.datas.push(newData);
   }
-  return undefined;
+};
+
+const removeDataAction: CaseReducer<
+  State,
+  PayloadAction<{
+    target: number;
+    belongTo?: number;
+  }>
+> = (state, action) => {
+  const { target, belongTo } = action.payload;
+
+  if (belongTo !== undefined) {
+    const newArray = state.datas[belongTo].subHeadings?.filter(
+      (subHeading) => subHeading.idx !== target
+    );
+    if (newArray) {
+      for (let idx = target; idx < (newArray.length as number); idx += 1) {
+        newArray[idx].idx = idx;
+      }
+      state.datas[belongTo].subHeadings = newArray;
+    }
+  } else {
+    const newArray = state.datas.filter((data) => data.idx !== target);
+
+    if (newArray) {
+      for (let idx = target; idx < newArray.length; idx += 1) {
+        newArray[idx].idx = idx;
+      }
+      state.datas = newArray;
+    }
+  }
+
+  const findData = (data: Content) => {
+    if (belongTo !== undefined)
+      if (data.belongTo === belongTo && data.idx === target) return true;
+      else return false;
+    if (data.idx === target) return true;
+    return false;
+  };
+
+  if (state.updatedData.find(findData)) {
+    state.updatedData = state.updatedData.filter((data) => !findData(data));
+  }
 };
 
 export const contextSlice = createSlice({
@@ -56,26 +97,10 @@ export const contextSlice = createSlice({
   initialState,
   reducers: {
     addData: addDataAction,
+    removeData: removeDataAction,
   },
 });
 
-export const { addData } = contextSlice.actions;
+export const { addData, removeData } = contextSlice.actions;
 
 export default contextSlice.reducer;
-
-// export default class SidebarData {
-//   private static datas: Array<Content> = [];
-
-//   private static updatedDatas: Array<Content> = [];
-
-//   public static getData() {
-//     return [...this.datas];
-//   }
-
-//   // public pickContent(target: Position) {}
-
-//   // public moveContent(from: Position, to: Position) {}
-
-//   // public deleteContent(target: Positoin) {}
-
-// }

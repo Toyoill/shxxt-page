@@ -21,7 +21,7 @@ const Wrapper = styled.li<{ selected: boolean }>`
   padding-block: 0.2rem;
   width: 100%;
   list-style: none;
-  ${(props) => (props.selected ? 'backgroundColor: "#cbcbcb' : "")}
+  background-color: ${(props) => (props.selected ? "#cbcbcb" : "")};
 `;
 
 export default function SubHeadingWrapper({

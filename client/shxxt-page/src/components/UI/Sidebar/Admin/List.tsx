@@ -41,7 +41,6 @@ export default function List({ content, contextOpen }: Props) {
       select({
         type: "Heading",
         idx: content.idx,
-        belongs: content.idx,
       })
     );
   };

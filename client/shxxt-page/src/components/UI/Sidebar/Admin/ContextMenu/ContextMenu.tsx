@@ -56,9 +56,12 @@ export default function ContextMenu() {
     behavior.push(<Add key={1} type="SubHeading" />);
   } else if (selectedType === "Heading") {
     behavior.push(<Add key={1} type="SubHeading" />);
+    behavior.push(<Remove key={2} />);
+    behavior.push(<Rename key={3} />);
+  } else {
+    behavior.push(<Remove key={2} />);
+    behavior.push(<Rename key={3} />);
   }
-  behavior.push(<Remove key={2} />);
-  behavior.push(<Rename key={3} />);
 
   return (
     <ContextMenuContainer open={open} posX={pos.x} posY={pos.y}>
