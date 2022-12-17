@@ -22,7 +22,7 @@ const addDataAction: CaseReducer<
     const newData: Content = {
       type,
       idx: state.datas.length,
-      main: `Heading${state.datas.length}`,
+      main: "새 그룹",
     };
 
     state.updatedData.push(newData);
@@ -39,7 +39,7 @@ const addDataAction: CaseReducer<
     const newData: Content = {
       type,
       idx: newIdx,
-      main: `SubHeading${newIdx}`,
+      main: "새 글",
     };
 
     if (target !== undefined) {
