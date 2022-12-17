@@ -4,8 +4,6 @@ import styled from "styled-components";
 interface Props {
   children: string;
   canClick?: boolean;
-  idx?: number;
-  belongTo?: number;
 }
 
 const StyledDiv = styled.div<{ canClick: boolean }>`
@@ -20,13 +18,6 @@ const StyledDiv = styled.div<{ canClick: boolean }>`
   }
 `;
 
-export default function SubHeading({
-  idx,
-  belongTo,
-  children,
-  canClick = true,
-}: Props) {
-  if (!idx) console.log("no Idx");
-  if (!belongTo) console.log("belongTo");
+export default function SubHeading({ children, canClick = true }: Props) {
   return <StyledDiv canClick={canClick}>{children}</StyledDiv>;
 }

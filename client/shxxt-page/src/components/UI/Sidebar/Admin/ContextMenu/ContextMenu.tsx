@@ -41,6 +41,7 @@ const ContextMenuContainer = styled.div<{
 export default function ContextMenu() {
   const open = useAppSelector((state) => state.context.open);
   const pos = useAppSelector((state) => state.context.pos);
+  const selectedType = useAppSelector((state) => state.select.selected?.type);
 
   const dispatch = useAppDispatch();
 
@@ -48,16 +49,24 @@ export default function ContextMenu() {
     if (open) dispatch(closeContext());
   };
 
+  const behavior: Array<JSX.Element> = [];
+
+  if (selectedType === undefined) {
+    behavior.push(<Add key={0} type="Heading" />);
+    behavior.push(<Add key={1} type="SubHeading" />);
+  } else if (selectedType === "Heading") {
+    behavior.push(<Add key={1} type="SubHeading" />);
+  }
+  behavior.push(<Remove key={2} />);
+  behavior.push(<Rename key={3} />);
+
   return (
     <ContextMenuContainer open={open} posX={pos.x} posY={pos.y}>
       <OutsideClickWrapper
         outsideClickHandler={outsideClickHandler}
         check={open}
       >
-        <Add type="Heading" />
-        <Add type="SubHeading" />
-        <Remove />
-        <Rename />
+        {behavior}
       </OutsideClickWrapper>
     </ContextMenuContainer>
   );

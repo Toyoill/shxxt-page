@@ -41,6 +41,7 @@ export default function List({ content, contextOpen }: Props) {
       select({
         type: "Heading",
         idx: content.idx,
+        belongs: content.idx,
       })
     );
   };
@@ -54,6 +55,7 @@ export default function List({ content, contextOpen }: Props) {
   };
 
   const contextMenuHandler = (evt: MouseEvent) => {
+    evt.stopPropagation();
     if (!selected) {
       dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
       selectHandler();

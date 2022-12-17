@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
 import { addData } from "../../../../../store/sidebar/contentReducer";
+import { closeContext } from "../../../../../store/sidebar/contextReducer";
 
 interface Props {
   type: "Heading" | "SubHeading";
@@ -30,13 +31,14 @@ export default function Add({ type }: Props) {
   const clickHandler = () => {
     if (selected) {
       const newData = {
-        type: selected.type,
-        target: selected.belongs ? selected.belongs : undefined,
+        type,
+        target: selected.belongs,
       };
       dispatch(addData(newData));
     } else {
       dispatch(addData({ type }));
     }
+    dispatch(closeContext());
   };
 
   return (

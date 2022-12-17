@@ -54,6 +54,7 @@ export default function SubHeadingWrapper({
   };
 
   const contextMenuHandler = (evt: MouseEvent) => {
+    evt.stopPropagation();
     selectHandler();
     dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
   };

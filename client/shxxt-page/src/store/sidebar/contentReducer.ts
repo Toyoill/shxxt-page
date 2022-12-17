@@ -33,7 +33,8 @@ const addDataAction: CaseReducer<
   } else {
     let newIdx: number;
 
-    if (target) newIdx = state.datas[target].subHeadings?.length as number;
+    if (target !== undefined)
+      newIdx = state.datas[target].subHeadings?.length as number;
     else newIdx = state.datas.length;
 
     const newData: Content = {
@@ -42,7 +43,7 @@ const addDataAction: CaseReducer<
       main: "new SubHeading",
     };
 
-    if (target) {
+    if (target !== undefined) {
       newData.belongTo = target;
       state.datas[target].subHeadings?.push(newData);
     } else state.datas.push(newData);
