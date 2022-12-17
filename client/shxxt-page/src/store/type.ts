@@ -5,7 +5,7 @@ export interface Selected {
 }
 
 export interface SelectState {
-  selected: Selected | boolean;
+  selected: Selected | undefined;
 }
 
 export interface Pos {

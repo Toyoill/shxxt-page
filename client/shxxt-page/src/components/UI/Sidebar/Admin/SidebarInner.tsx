@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-import SidebarData, { Content } from "../data/sidebarData";
 import List from "./List";
 import SubHeading from "../Content/SubHeading";
 import SubHeadingWrapper from "./ContentWrapper/SubHeadingWrapper";
@@ -19,15 +18,8 @@ const Wrapper = styled.div`
 `;
 
 export default function SidebarInner() {
-  const [datas, setDatas] = useState<Array<Content>>([]);
-
-  const updateHandler = () => setDatas(SidebarData.getData());
-
+  const datas = useAppSelector((state) => state.content.datas);
   const contextOpen = useAppSelector((state) => state.context.open);
-
-  useEffect(() => {
-    updateHandler();
-  }, []);
 
   const contents = datas.map((data) => {
     if (data.type === "Heading")

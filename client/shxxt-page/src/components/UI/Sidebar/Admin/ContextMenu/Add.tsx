@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-// import { useAppDispatch } from "../../../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
+import { addData } from "../../../../../store/sidebar/contentReducer";
 
 interface Props {
   type: "Heading" | "SubHeading";
@@ -14,7 +15,9 @@ const Wrapper = styled.button<{ focused: boolean }>`
 export default function Add({ type }: Props) {
   const [focused, setFocused] = useState(false);
 
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+
+  const selected = useAppSelector((state) => state.select.selected);
 
   const mouseOverHandler = () => {
     setFocused(true);
@@ -24,11 +27,24 @@ export default function Add({ type }: Props) {
     setFocused(false);
   };
 
+  const clickHandler = () => {
+    if (selected) {
+      const newData = {
+        type: selected.type,
+        target: selected.belongs ? selected.belongs : undefined,
+      };
+      dispatch(addData(newData));
+    } else {
+      dispatch(addData({ type }));
+    }
+  };
+
   return (
     <Wrapper
       focused={focused}
       onMouseOut={mouseOutHandler}
       onMouseOver={mouseOverHandler}
+      onClick={clickHandler}
     >
       {type === "Heading" ? "그룹" : "글"}추가
     </Wrapper>

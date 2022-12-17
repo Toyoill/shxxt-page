@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Selected, SelectState } from "../type";
 
 const initialState: SelectState = {
-  selected: false,
+  selected: undefined,
 };
 
 export const selectSlice = createSlice({
@@ -14,7 +14,7 @@ export const selectSlice = createSlice({
       state.selected = action.payload;
     },
     unselect: (state) => {
-      state.selected = false;
+      state.selected = undefined;
     },
   },
 });
