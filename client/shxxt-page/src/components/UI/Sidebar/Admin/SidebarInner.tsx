@@ -6,6 +6,8 @@ import List from "./List";
 import SubHeading from "../Content/SubHeading";
 import SubHeadingWrapper from "./ContentWrapper/SubHeadingWrapper";
 
+import { useAppSelector } from "../../../../store/hooks";
+
 const Wrapper = styled.div`
   width: 100%;
 
@@ -21,22 +23,19 @@ export default function SidebarInner() {
 
   const updateHandler = () => setDatas(SidebarData.getData());
 
+  const contextOpen = useAppSelector((state) => state.context.open);
+
   useEffect(() => {
     updateHandler();
   }, []);
 
-  const addHandler = (type: "Heading" | "SubHeading") => {
-    SidebarData.addContent(type);
-    updateHandler();
-  };
-
-  if (false) addHandler("Heading");
-
   const contents = datas.map((data) => {
-    if (data.type === "Heading") return <List key={data.idx} content={data} />;
+    if (data.type === "Heading")
+      return <List key={data.idx} content={data} contextOpen={contextOpen} />;
     return (
       <SubHeadingWrapper
         key={data.idx}
+        contextOpen={contextOpen}
         parentContextHandler={() => {}}
         parentSelected={false}
         idx={data.idx}

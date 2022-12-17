@@ -5,7 +5,8 @@ import LongPressWrapper from "../../../../FunctionalWrapper/LongPressWrapper";
 
 interface Props {
   children: JSX.Element | Array<JSX.Element>;
-  clickHandler: (event: MouseEvent) => void;
+  mouseUpHandler?: (event: MouseEvent) => void;
+  mouseDownHandler?: (event: MouseEvent) => void;
   longPressHandler: (longPressed: boolean) => void;
 }
 
@@ -17,11 +18,13 @@ const ClickWrapper = styled.div`
   align-items: center;
   width: max-content;
   display: flex;
+  width: 100%;
 `;
 
 export default function HeadingWrapper({
   children,
-  clickHandler,
+  mouseUpHandler,
+  mouseDownHandler,
   longPressHandler,
 }: Props) {
   const defaultStyle: CSSObject = {
@@ -37,7 +40,9 @@ export default function HeadingWrapper({
         defaultStyle={defaultStyle}
         longPressHandler={longPressHandler}
       >
-        <ClickWrapper onClick={clickHandler}>{children}</ClickWrapper>
+        <ClickWrapper onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}>
+          {children}
+        </ClickWrapper>
       </LongPressWrapper>
     </Wrapper>
   );

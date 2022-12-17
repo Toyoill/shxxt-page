@@ -2,7 +2,6 @@ import React, { useState, MouseEvent } from "react";
 import styled from "styled-components";
 
 import LongPressWrapper from "../../../../FunctionalWrapper/LongPressWrapper";
-import OutsideClickWrapper from "../../../../FunctionalWrapper/OutsideClickWrapper";
 
 import { useAppDispatch } from "../../../../../store/hooks";
 import { openContext } from "../../../../../store/sidebar/contextReducer";
@@ -11,6 +10,7 @@ import { select, unselect } from "../../../../../store/sidebar/selectReducer";
 interface Props {
   belongTo: number | undefined;
   children: JSX.Element;
+  contextOpen: boolean;
   idx: number;
   parentContextHandler: (evt: MouseEvent) => void | (() => void);
   parentSelected: boolean;
@@ -27,6 +27,7 @@ const Wrapper = styled.li<{ selected: boolean }>`
 export default function SubHeadingWrapper({
   belongTo,
   children,
+  contextOpen,
   idx,
   parentContextHandler,
   parentSelected,
@@ -36,7 +37,6 @@ export default function SubHeadingWrapper({
   const dispatch = useAppDispatch();
 
   const selectHandler = () => {
-    console.log("select!");
     dispatch(
       select({
         type: "SubHeading",
@@ -53,30 +53,30 @@ export default function SubHeadingWrapper({
     }
   };
 
-  const outsideClickHandler = () => {
-    setSelected(false);
-    dispatch(unselect());
-  };
-
   const contextMenuHandler = (evt: MouseEvent) => {
     selectHandler();
     dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
+  };
+
+  const mouseUpHandler = (evt: MouseEvent) => {
+    if (evt.button === 0) {
+      if (selected) {
+        setSelected(false);
+        if (!contextOpen) dispatch(unselect());
+      }
+    }
   };
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper
       selected={selected}
+      onMouseUp={mouseUpHandler}
       onContextMenu={parentSelected ? parentContextHandler : contextMenuHandler}
     >
-      <OutsideClickWrapper
-        check={selected}
-        outsideClickHandler={outsideClickHandler}
-      >
-        <LongPressWrapper longPressHandler={longPressHandler}>
-          {children}
-        </LongPressWrapper>
-      </OutsideClickWrapper>
+      <LongPressWrapper longPressHandler={longPressHandler}>
+        {children}
+      </LongPressWrapper>
     </Wrapper>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+// import { useAppDispatch } from "../../../../../store/hooks";
+
 interface Props {
   type: "Heading" | "SubHeading";
 }
@@ -11,6 +13,8 @@ const Wrapper = styled.button<{ focused: boolean }>`
 
 export default function Add({ type }: Props) {
   const [focused, setFocused] = useState(false);
+
+  // const dispatch = useAppDispatch();
 
   const mouseOverHandler = () => {
     setFocused(true);

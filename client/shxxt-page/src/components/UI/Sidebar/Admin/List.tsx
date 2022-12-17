@@ -7,7 +7,6 @@ import Heading from "../Content/Heading";
 import SubHeadingWrapper from "./ContentWrapper/SubHeadingWrapper";
 import SubHeading from "../Content/SubHeading";
 import Icon from "../Content/Icon";
-import OutsideClickWrapper from "../../../FunctionalWrapper/OutsideClickWrapper";
 
 import { useAppDispatch } from "../../../../store/hooks";
 import { openContext } from "../../../../store/sidebar/contextReducer";
@@ -15,6 +14,7 @@ import { select, unselect } from "../../../../store/sidebar/selectReducer";
 
 interface Props {
   content: Content;
+  contextOpen: boolean;
 }
 
 const ListWrapper = styled.li<{ open: boolean; selected: boolean }>`
@@ -29,7 +29,7 @@ const ListWrapper = styled.li<{ open: boolean; selected: boolean }>`
   }
 `;
 
-export default function List({ content }: Props) {
+export default function List({ content, contextOpen }: Props) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(false);
   const canOpen = useRef(false);
@@ -54,18 +54,19 @@ export default function List({ content }: Props) {
   };
 
   const contextMenuHandler = (evt: MouseEvent) => {
-    dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
-    selectHandler();
+    if (!selected) {
+      dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
+      selectHandler();
+    }
   };
 
-  const clickHandler = () => {
-    if (canOpen.current) canOpen.current = false;
-    if (!selected) setOpen((prev) => !prev);
-  };
-
-  const outsideClickHandler = () => {
-    setSelected(false);
-    dispatch(unselect());
+  const mouseUpHandler = (evt: MouseEvent) => {
+    if (evt.button === 0) {
+      if (selected) {
+        setSelected(false);
+        if (!contextOpen) dispatch(unselect());
+      } else setOpen((prev) => !prev);
+    }
   };
 
   const subHeadings = content.subHeadings?.map((subHeading) => (
@@ -75,6 +76,7 @@ export default function List({ content }: Props) {
       parentContextHandler={contextMenuHandler}
       idx={subHeading.idx}
       belongTo={subHeading.belongTo}
+      contextOpen={contextOpen}
     >
       <SubHeading>{subHeading.main}</SubHeading>
     </SubHeadingWrapper>
@@ -86,19 +88,14 @@ export default function List({ content }: Props) {
       selected={selected}
       onContextMenu={contextMenuHandler}
     >
-      <OutsideClickWrapper
-        check={selected}
-        outsideClickHandler={outsideClickHandler}
+      <HeadingWrapper
+        longPressHandler={longPressHandler}
+        mouseUpHandler={mouseUpHandler}
       >
-        <HeadingWrapper
-          longPressHandler={longPressHandler}
-          clickHandler={clickHandler}
-        >
-          <Icon open={open} />
-          <Heading title={content.main} />
-        </HeadingWrapper>
-        <ol>{subHeadings}</ol>
-      </OutsideClickWrapper>
+        <Icon open={open} />
+        <Heading title={content.main} />
+      </HeadingWrapper>
+      <ol>{subHeadings}</ol>
     </ListWrapper>
   );
 }

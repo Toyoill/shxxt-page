@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, MouseEvent } from "react";
 
 export default function useLongPress(
   callback: Function = () => {},
@@ -19,18 +19,23 @@ export default function useLongPress(
     };
   }, [pressed, callback, ms]);
 
-  const buttonPressed = useCallback(() => {
-    setPressed(true);
+  const buttonPressed = useCallback((evt: MouseEvent) => {
+    if (evt.button === 0) setPressed(true);
   }, []);
 
-  const buttonReleased = useCallback(() => {
-    setPressed(false);
-    callback(false);
-  }, [callback]);
+  const buttonReleased = useCallback(
+    (evt: MouseEvent) => {
+      if (evt.button === 0) {
+        setPressed(false);
+        callback(false);
+      }
+    },
+    [callback]
+  );
 
   return {
-    onMouseDown: () => buttonPressed(),
-    onMouseUp: () => buttonReleased(),
-    onMouseLeave: () => buttonReleased(),
+    onMouseDown: (evt: MouseEvent) => buttonPressed(evt),
+    onMouseUp: (evt: MouseEvent) => buttonReleased(evt),
+    onMouseLeave: (evt: MouseEvent) => buttonReleased(evt),
   };
 }
