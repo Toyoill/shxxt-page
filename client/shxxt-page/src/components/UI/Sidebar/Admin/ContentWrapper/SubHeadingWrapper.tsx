@@ -6,12 +6,12 @@ import LongPressWrapper from "../../../../FunctionalWrapper/LongPressWrapper";
 import { useAppDispatch } from "../../../../../store/hooks";
 import { openContext } from "../../../../../store/sidebar/contextReducer";
 import { select, unselect } from "../../../../../store/sidebar/selectReducer";
+import { Content } from "../../../../../store/type";
 
 interface Props {
-  belongTo: number | undefined;
   children: JSX.Element;
+  content: Content;
   contextOpen: boolean;
-  idx: number;
   parentContextHandler: (evt: MouseEvent) => void | (() => void);
   parentSelected: boolean;
 }
@@ -25,10 +25,9 @@ const Wrapper = styled.li<{ selected: boolean }>`
 `;
 
 export default function SubHeadingWrapper({
-  belongTo,
   children,
+  content,
   contextOpen,
-  idx,
   parentContextHandler,
   parentSelected,
 }: Props) {
@@ -40,8 +39,12 @@ export default function SubHeadingWrapper({
     dispatch(
       select({
         type: "SubHeading",
-        idx,
-        belongs: belongTo,
+        idx: content.data.idx,
+        belongs:
+          content.data.belongTo === undefined
+            ? undefined
+            : content.data.belongTo,
+        updateId: content.updateId === undefined ? undefined : content.updateId,
       })
     );
   };

@@ -1,7 +1,6 @@
 import React, { MouseEvent, useRef, useState } from "react";
 import styled from "styled-components";
 
-import { Content } from "../data/sidebarData";
 import HeadingWrapper from "./ContentWrapper/HeadingWrapper";
 import Heading from "../Content/Heading";
 import SubHeadingWrapper from "./ContentWrapper/SubHeadingWrapper";
@@ -11,6 +10,7 @@ import Icon from "../Content/Icon";
 import { useAppDispatch } from "../../../../store/hooks";
 import { openContext } from "../../../../store/sidebar/contextReducer";
 import { select, unselect } from "../../../../store/sidebar/selectReducer";
+import { Content } from "../../../../store/type";
 
 interface Props {
   content: Content;
@@ -40,7 +40,8 @@ export default function List({ content, contextOpen }: Props) {
     dispatch(
       select({
         type: "Heading",
-        idx: content.idx,
+        idx: content.data.idx,
+        updateId: content.updateId === undefined ? undefined : content.updateId,
       })
     );
   };
@@ -72,14 +73,13 @@ export default function List({ content, contextOpen }: Props) {
 
   const subHeadings = content.subHeadings?.map((subHeading) => (
     <SubHeadingWrapper
-      key={subHeading.idx}
+      content={subHeading}
+      contextOpen={contextOpen}
+      key={subHeading.data.idx}
       parentSelected={selected}
       parentContextHandler={contextMenuHandler}
-      idx={subHeading.idx}
-      belongTo={subHeading.belongTo}
-      contextOpen={contextOpen}
     >
-      <SubHeading>{subHeading.main}</SubHeading>
+      <SubHeading>{subHeading.data.main}</SubHeading>
     </SubHeadingWrapper>
   ));
 
@@ -94,7 +94,7 @@ export default function List({ content, contextOpen }: Props) {
         mouseUpHandler={mouseUpHandler}
       >
         <Icon open={open} />
-        <Heading title={content.main} />
+        <Heading title={content.data.main} />
       </HeadingWrapper>
       <ol>{subHeadings}</ol>
     </ListWrapper>

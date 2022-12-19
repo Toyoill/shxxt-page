@@ -1,95 +1,15 @@
 /* eslint-disable no-param-reassign */
-import { CaseReducer, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Content } from "../type";
+import { createSlice } from "@reduxjs/toolkit";
+import { ContentState } from "../type";
 
-interface State {
-  datas: Array<Content>;
-  updatedData: Array<Content>;
-}
+import addDataAction from "./contentReducerActions./addDataAction";
+import removeDataAction from "./contentReducerActions./removeDataAction";
+import renameDataAction from "./contentReducerActions./renameDataActoin";
 
-const initialState: State = {
-  datas: [],
-  updatedData: [],
-};
-
-const addDataAction: CaseReducer<
-  State,
-  PayloadAction<{ type: "Heading" | "SubHeading"; target?: number }>
-> = (state, action) => {
-  const { type, target } = action.payload;
-
-  if (type === "Heading") {
-    const newData: Content = {
-      type,
-      idx: state.datas.length,
-      main: "새 그룹",
-    };
-
-    state.updatedData.push(newData);
-
-    newData.subHeadings = [];
-    state.datas.push(newData);
-  } else {
-    let newIdx: number;
-
-    if (target !== undefined)
-      newIdx = state.datas[target].subHeadings?.length as number;
-    else newIdx = state.datas.length;
-
-    const newData: Content = {
-      type,
-      idx: newIdx,
-      main: "새 글",
-    };
-
-    if (target !== undefined) {
-      newData.belongTo = target;
-      state.datas[target].subHeadings?.push(newData);
-    } else state.datas.push(newData);
-  }
-};
-
-const removeDataAction: CaseReducer<
-  State,
-  PayloadAction<{
-    target: number;
-    belongTo?: number;
-  }>
-> = (state, action) => {
-  const { target, belongTo } = action.payload;
-
-  if (belongTo !== undefined) {
-    const newArray = state.datas[belongTo].subHeadings?.filter(
-      (subHeading) => subHeading.idx !== target
-    );
-    if (newArray) {
-      for (let idx = target; idx < (newArray.length as number); idx += 1) {
-        newArray[idx].idx = idx;
-      }
-      state.datas[belongTo].subHeadings = newArray;
-    }
-  } else {
-    const newArray = state.datas.filter((data) => data.idx !== target);
-
-    if (newArray) {
-      for (let idx = target; idx < newArray.length; idx += 1) {
-        newArray[idx].idx = idx;
-      }
-      state.datas = newArray;
-    }
-  }
-
-  const findData = (data: Content) => {
-    if (belongTo !== undefined)
-      if (data.belongTo === belongTo && data.idx === target) return true;
-      else return false;
-    if (data.idx === target) return true;
-    return false;
-  };
-
-  if (state.updatedData.find(findData)) {
-    state.updatedData = state.updatedData.filter((data) => !findData(data));
-  }
+const initialState: ContentState = {
+  contents: [],
+  updatedContents: [],
+  updateId: 0,
 };
 
 export const contextSlice = createSlice({
@@ -98,9 +18,10 @@ export const contextSlice = createSlice({
   reducers: {
     addData: addDataAction,
     removeData: removeDataAction,
+    renameData: renameDataAction,
   },
 });
 
-export const { addData, removeData } = contextSlice.actions;
+export const { addData, removeData, renameData } = contextSlice.actions;
 
 export default contextSlice.reducer;

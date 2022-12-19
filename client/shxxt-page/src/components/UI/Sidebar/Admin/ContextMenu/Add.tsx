@@ -11,6 +11,15 @@ interface Props {
 }
 
 const Wrapper = styled.button<{ focused: boolean }>`
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-block: 0.2rem;
+  width: 100%;
+  text-align: left;
+
   background-color: ${(props) => (props.focused ? "#6fabff" : "inherit")};
 `;
 

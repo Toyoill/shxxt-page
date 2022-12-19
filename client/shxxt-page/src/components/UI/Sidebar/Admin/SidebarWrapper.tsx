@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import SidebarData from "../data/sidebarData";
 import ContextMenu from "./ContextMenu/ContextMenu";
 
 import SidebarInner from "./SidebarInner";
@@ -18,11 +17,6 @@ const SidebarContainer = styled.nav`
 `;
 
 export default function Sidebar() {
-  SidebarData.addContent("Heading");
-  SidebarData.addContent("Heading");
-  SidebarData.addContent("Heading");
-  SidebarData.getData();
-
   return (
     <SidebarContainer>
       <ContextMenu />

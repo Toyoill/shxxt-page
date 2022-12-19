@@ -11,6 +11,7 @@ interface Props {
 }
 
 const Wrapper = styled.div`
+  border-radius: "5px";
   width: 100%;
 `;
 
@@ -28,7 +29,6 @@ export default function HeadingWrapper({
   longPressHandler,
 }: Props) {
   const defaultStyle: CSSObject = {
-    borderRadius: "5px",
     paddingBlock: "0.2rem",
     width: "100%",
   };
