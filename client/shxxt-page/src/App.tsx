@@ -3,14 +3,14 @@ import { Provider } from "react-redux";
 
 import styled from "styled-components";
 // import MainPage from "./page/Home/MainPage";
-import Sidebar from "./components/UI/Sidebar/Admin/SidebarWrapper";
+// import Sidebar from "./components/UI/Sidebar/Admin/SidebarWrapper";
+import Document from "./page/Document/Admin/Document";
 
 import store from "./store/rootReducer";
 
 const MainContainer = styled.div({
-  width: "100vw",
+  width: "100%",
   height: 1000,
-  backgroundColor: "#F5F2ED",
 });
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
     // 최종 commit 전 되돌릴 코드
     <Provider store={store}>
       <MainContainer>
-        <Sidebar />
+        <Document />
       </MainContainer>
     </Provider>
     /*
