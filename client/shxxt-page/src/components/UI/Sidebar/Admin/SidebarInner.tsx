@@ -7,6 +7,7 @@ import SubHeadingWrapper from "./ContentWrapper/SubHeadingWrapper";
 
 import { useAppSelector, useAppDispatch } from "../../../../store/hooks";
 import { openContext } from "../../../../store/sidebar/contextReducer";
+import EditBar from "./EditBar";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -53,6 +54,7 @@ export default function SidebarInner() {
 
   return (
     <Wrapper onContextMenu={contextHandler}>
+      <EditBar />
       <MainWrapper>{main}</MainWrapper>
     </Wrapper>
   );

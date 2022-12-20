@@ -13,12 +13,6 @@ const renameDataAction: CaseReducer<
 > = (state, action) => {
   const { target, main, belongTo, updateId } = action.payload;
 
-  if (belongTo === undefined) {
-    state.contents[target].data.main = main;
-  } else {
-    state.contents[belongTo].subHeadings[target].data.main = main;
-  }
-
   if (updateId !== undefined) {
     state.updatedContents.find((content) => {
       if (content.updateId === updateId) {
@@ -27,6 +21,23 @@ const renameDataAction: CaseReducer<
       }
       return false;
     });
+    if (belongTo === undefined) {
+      state.contents[target].data.main = main;
+    } else {
+      state.contents[belongTo].subHeadings[target].data.main = main;
+    }
+  } else if (belongTo === undefined) {
+    state.contents[target].data.main = main;
+
+    state.contents[target].updateId = state.updateId;
+    state.updateId += 1;
+    state.updatedContents.push(state.contents[target]);
+  } else {
+    state.contents[belongTo].subHeadings[target].data.main = main;
+
+    state.contents[target].subHeadings[target].updateId = state.updateId;
+    state.updateId += 1;
+    state.updatedContents.push(state.contents[target].subHeadings[target]);
   }
 };
 

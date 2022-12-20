@@ -12,6 +12,22 @@ const removeDataAction: CaseReducer<
 > = (state, action) => {
   const { target, belongTo, updateId } = action.payload;
 
+  if (updateId !== undefined) {
+    state.updatedContents.find((content) => {
+      if (content.updateId === updateId) {
+        content.updateId = -1;
+        return true;
+      }
+      return false;
+    });
+  } else if (belongTo === undefined) {
+    state.contents[target].updateId = -1;
+    state.updatedContents.push(state.contents[target]);
+  } else {
+    state.contents[belongTo].subHeadings[target].updateId = -1;
+    state.updatedContents.push(state.contents[belongTo].subHeadings[target]);
+  }
+
   if (belongTo === undefined) {
     state.contents.splice(target, 1);
 
@@ -26,6 +42,10 @@ const removeDataAction: CaseReducer<
           }
           return false;
         });
+      } else {
+        state.contents[idx].updateId = state.updateId;
+        state.updatedContents.push(state.contents[idx]);
+        state.updateId += 1;
       }
     }
   } else {
@@ -34,29 +54,25 @@ const removeDataAction: CaseReducer<
     const { length } = state.contents[belongTo].subHeadings;
 
     for (let idx = target; idx < length; idx += 1) {
-      state.contents[belongTo].subHeadings[belongTo].data.idx = idx;
+      state.contents[belongTo].subHeadings[idx].data.idx = idx;
 
-      if (
-        state.contents[belongTo].subHeadings[belongTo].updateId !== undefined
-      ) {
+      if (state.contents[belongTo].subHeadings[idx].updateId !== undefined) {
         state.updatedContents.find((content) => {
           if (
             content.updateId ===
-            state.contents[belongTo].subHeadings[belongTo].updateId
+            state.contents[belongTo].subHeadings[idx].updateId
           ) {
             content.data.idx = idx;
             return true;
           }
           return false;
         });
+      } else {
+        state.contents[belongTo].subHeadings[idx].updateId = state.updateId;
+        state.updatedContents.push(state.contents[belongTo].subHeadings[idx]);
+        state.updateId += 1;
       }
     }
-  }
-
-  if (updateId !== undefined) {
-    state.updatedContents = state.updatedContents.filter(
-      (content) => content.updateId !== updateId
-    );
   }
 };
 

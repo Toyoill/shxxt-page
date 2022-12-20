@@ -27,6 +27,7 @@ export interface Content {
   updateId?: number;
 }
 
+// updateId === -1 : removed
 export interface ContentState {
   contents: Array<Content>;
   updatedContents: Array<Content>;

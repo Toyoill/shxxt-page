@@ -21,8 +21,9 @@ const addDataAction: CaseReducer<
       subHeadings: [],
     };
 
-    state.contents.push(newContent);
     state.updatedContents.push(newContent);
+
+    state.contents.push(newContent);
   } else {
     let newIdx: number;
 
