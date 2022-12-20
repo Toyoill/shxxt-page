@@ -10,7 +10,7 @@ import store from "./store/rootReducer";
 
 const MainContainer = styled.div({
   width: "100%",
-  height: 1000,
+  height: "100vh",
 });
 
 function App() {
