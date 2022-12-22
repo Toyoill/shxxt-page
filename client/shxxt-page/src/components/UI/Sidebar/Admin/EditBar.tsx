@@ -1,42 +1,41 @@
 import React from "react";
 import styled from "styled-components";
+import SimpleLineIcon from "react-simple-line-icons";
 
-const EditBarContainer = styled.div`
-  background-color: #e4e4e4;
+import { useAppSelector } from "../../../../store/hooks";
+
+const EditContainer = styled.div`
+  background-color: #bdbdbd;
+  border: 1px solid #acacac;
+  border-radius: 3px;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
-  margin-top: 0.5rem;
+  margin-block: 0.5rem;
+  padding-block: 0.3rem;
+  width: 100%;
 
   & > button {
-    background-color: #8b8b8b;
-    border: 0;
-    border-radius: 0.2rem;
-    color: white;
     cursor: pointer;
-    height: 1.5rem;
-    margin-block: 0.2rem;
-    margin-inline: 0.5rem;
-    width: 1.5rem;
-
-    &:hover {
-      background: black;
-    }
   }
 `;
 
 export default function EditBar() {
+  const updated = useAppSelector((state) => state.content.updatedContents);
+
+  const saveHandler = () => {
+    console.log("print...");
+    for (let idx = 0; idx < updated.length; idx += 1) {
+      console.log(updated[idx].data, updated[idx].updateId);
+    }
+    console.log("...end");
+  };
+
   return (
-    <EditBarContainer>
-      <button type="button">#</button>
-      <button type="button">+</button>
-      <button
-        type="button"
-        onContextMenu={(evt) => {
-          evt.preventDefault();
-        }}
-      >
-        -
+    <EditContainer>
+      <button type="button">
+        <SimpleLineIcon name="cloud-upload" onClick={saveHandler} />
       </button>
-    </EditBarContainer>
+    </EditContainer>
   );
 }

@@ -1,17 +1,44 @@
-import React from "react";
-import styled from "styled-components";
+import React, { MouseEvent } from "react";
+import styled, { CSSObject } from "styled-components";
+
+import LongPressWrapper from "../../../../FunctionalWrapper/LongPressWrapper";
 
 interface Props {
-  children: JSX.Element;
+  children: JSX.Element | Array<JSX.Element>;
+  mouseUpHandler?: (event: MouseEvent) => void;
+  mouseDownHandler?: (event: MouseEvent) => void;
 }
 
-const Wrapper = styled.summary`
-  border-radius: 5px;
-  box-sizing: border-box;
-  padding-block: 0.2rem;
+const Wrapper = styled.div`
+  border-radius: "5px";
   width: 100%;
 `;
 
-export default function ContentContainer({ children }: Props) {
-  return <Wrapper>{children}</Wrapper>;
+const ClickWrapper = styled.div`
+  align-items: center;
+  width: max-content;
+  display: flex;
+  width: 100%;
+`;
+
+export default function HeadingWrapper({
+  children,
+  mouseUpHandler,
+  mouseDownHandler,
+}: Props) {
+  const defaultStyle: CSSObject = {
+    paddingBlock: "0.2rem",
+    width: "100%",
+  };
+
+  return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Wrapper>
+      <LongPressWrapper defaultStyle={defaultStyle}>
+        <ClickWrapper onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}>
+          {children}
+        </ClickWrapper>
+      </LongPressWrapper>
+    </Wrapper>
+  );
 }
