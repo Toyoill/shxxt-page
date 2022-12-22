@@ -6,6 +6,7 @@ import Sidebar from "../../../components/UI/Sidebar/Admin/SidebarWrapper";
 
 const DocumentWrapper = styled.div`
   display: flex;
+  position: relative;
   justify-content: space-around;
   height: 100vh;
   width: 84vw;
@@ -14,6 +15,7 @@ const DocumentWrapper = styled.div`
 
 const EditerWrapper = styled.div`
   flex: 1;
+  box-shadow: 0px 0px 8px rgb(0 0 0 / 10%);
   padding-bottom: 4rem;
   position: relative;
   width: 42vw;
@@ -34,7 +36,7 @@ const EditerWrapper = styled.div`
 `;
 
 const MarkdownWrapper = styled.div`
-  background-color: #f5f2ed;
+  background-color: #fbfdfc;
   box-sizing: border-box;
   font-family: sans-serif, "Nanum Gothic";
   flex: 1;
