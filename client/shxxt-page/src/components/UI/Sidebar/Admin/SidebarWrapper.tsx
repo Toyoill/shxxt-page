@@ -8,11 +8,8 @@ const SidebarContainer = styled.nav`
   border: 1px solid black;
   height: 100vh;
   left: 0px;
-  max-width: 20rem;
-  min-width: 15rem;
   position: fixed;
-  top: 0;
-  width: 15vw;
+  width: 16vw;
   z-index: 9;
 `;
 

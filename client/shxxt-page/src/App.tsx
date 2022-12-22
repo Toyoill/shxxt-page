@@ -3,7 +3,6 @@ import { Provider } from "react-redux";
 
 import styled from "styled-components";
 // import MainPage from "./page/Home/MainPage";
-// import Sidebar from "./components/UI/Sidebar/Admin/SidebarWrapper";
 import Document from "./page/Document/Admin/Document";
 
 import store from "./store/rootReducer";

@@ -1,33 +1,47 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
+import EditBar from "./EditBar";
+import Sidebar from "../../../components/UI/Sidebar/Admin/SidebarWrapper";
 
 const DocumentWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  height: 100%;
-  width: 100vw;
+  height: 100vh;
+  width: 84vw;
+  padding-left: 16vw;
+`;
+
+const EditerWrapper = styled.div`
+  flex: 1;
+  padding-bottom: 4rem;
+  position: relative;
+  width: 42vw;
 
   & > textarea {
-    background-color: #fff;
-    border: 1px solid black;
+    background-color: #ffffff;
+    border: none;
+    box-sizing: border-box;
     font-family: sans-serif, "Nanum Gothic";
-    height: 80vh;
-    margin-top: 5vh;
+    font-size: 1rem;
+    height: 100%;
+    line-height: 1.5;
+    outline: none;
     padding: 1rem;
     resize: none;
-    width: 40vw;
+    width: inherit;
   }
 `;
 
 const MarkdownWrapper = styled.div`
-  background-color: #fff;
-  border: 1px solid black;
+  background-color: #f5f2ed;
+  box-sizing: border-box;
   font-family: sans-serif, "Nanum Gothic";
-  height: 80vh;
-  margin-top: 5vh;
+  flex: 1;
+  line-height: 1.5;
+  overflow-y: scroll;
   padding: 1rem;
-  width: 40vw;
+  width: 42vw;
   word-wrap: break-word;
 `;
 
@@ -38,11 +52,29 @@ export default function Document() {
     setArticle(evt.target.value);
   };
 
+  const keyDownHandler = (evt: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (evt.key === "Tab") {
+      setArticle((prev) => `${prev}\t`);
+      evt.preventDefault();
+    }
+  };
+
   return (
     <DocumentWrapper>
-      <textarea onChange={changeHandler} />
+      <Sidebar />
+      <EditerWrapper>
+        <textarea
+          onChange={changeHandler}
+          onKeyDown={keyDownHandler}
+          placeholder="내용을 입력해주세요"
+          value={article}
+        />
+        <EditBar />
+      </EditerWrapper>
       <MarkdownWrapper>
-        <ReactMarkdown unwrapDisallowed>{article}</ReactMarkdown>
+        <div>
+          <ReactMarkdown unwrapDisallowed>{article}</ReactMarkdown>
+        </div>
       </MarkdownWrapper>
     </DocumentWrapper>
   );
