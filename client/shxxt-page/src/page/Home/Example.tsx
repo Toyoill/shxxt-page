@@ -6,7 +6,7 @@ const ExampleTable = styled.table({
   marginLeft: "auto",
   marginRight: "auto",
   border: "2px solid #f4da98",
-  width: "70%",
+  width: "60%",
 });
 
 const TableRow = styled.tr({
