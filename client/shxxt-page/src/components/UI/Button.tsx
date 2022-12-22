@@ -1,7 +1,7 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import GuidePage from "../../page/Guide/GuidePage";
+// import GuidePage from "../../page/Guide/GuidePage";
 
 interface PropsType {
   title: string;
@@ -43,17 +43,11 @@ function Button({ title }: PropsType) {
   */
 
   return (
-    <BrowserRouter>
-      <StyledNav>
-        <Link to="/Guide">
-          <StyledButton>{title}</StyledButton>
-        </Link>
-      </StyledNav>
-
-      <Routes>
-        <Route path="/Guide" element={<GuidePage />} />
-      </Routes>
-    </BrowserRouter>
+    <StyledNav>
+      <Link to="/Guide">
+        <StyledButton>{title}</StyledButton>
+      </Link>
+    </StyledNav>
   );
 }
 
