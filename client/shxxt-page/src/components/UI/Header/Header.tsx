@@ -15,7 +15,7 @@ const HeaderContainer = styled.div`
   left: 0;
   top: 0;
   width: 100%;
-  height: 10rem;
+  height: 6rem;
   background-color: #7c5fe6;
   .wrapper {
     display: flex;
@@ -27,13 +27,15 @@ const HeaderContainer = styled.div`
   }
   .logo {
     color: #03d4fe;
-    font-size: 5rem;
+    font-size: 3rem;
     font-weight: bold;
   }
   .nav {
     ul {
+      padding: 0;
       display: flex;
       list-style: none;
+      width: 100%;
     }
     li {
       padding: 0.5rem 1.5rem;

@@ -4,7 +4,7 @@ import Content from "./Content";
 
 const MainPageWrapper = styled.div({
   // marginLeft: "10rem",
-  width: "100wh",
+  width: "100vw",
   height: "100%",
   backgroundColor: "#0aa",
 });
