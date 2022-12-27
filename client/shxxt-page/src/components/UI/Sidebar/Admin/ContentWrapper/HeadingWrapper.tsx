@@ -1,37 +1,49 @@
-import React from "react";
-import styled from "styled-components";
+import React, { MouseEvent } from "react";
+import styled, { CSSObject } from "styled-components";
 
-import useLongPress from "../../../../../util/useLongPress";
+import LongPressWrapper from "../../../../FunctionalWrapper/LongPressWrapper";
 
 interface Props {
-  longPressed: boolean;
-  onLongPress: Function;
-  children: JSX.Element;
+  children: JSX.Element | Array<JSX.Element>;
+  mouseUpHandler?: (event: MouseEvent) => void;
+  mouseDownHandler?: (event: MouseEvent) => void;
+  longPressHandler: (longPressed: boolean) => void;
 }
 
-const Wrapper = styled.summary<{ longPressed: boolean }>`
-  border-radius: 5px;
-  box-sizing: border-box;
-  padding-block: 0.2rem;
+const Wrapper = styled.div`
+  border-radius: "5px";
   width: 100%;
+`;
 
-  pointer-events: ${(props) => (props.longPressed ? "none" : "")};
+const ClickWrapper = styled.div`
+  align-items: center;
+  width: max-content;
+  display: flex;
+  width: 100%;
 `;
 
 export default function HeadingWrapper({
-  longPressed,
-  onLongPress,
   children,
+  mouseUpHandler,
+  mouseDownHandler,
+  longPressHandler,
 }: Props) {
-  const longPress = useLongPress(
-    (pressed: boolean) => onLongPress(pressed),
-    800
-  );
+  const defaultStyle: CSSObject = {
+    paddingBlock: "0.2rem",
+    width: "100%",
+  };
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper longPressed={longPressed} {...longPress}>
-      {children}
+    <Wrapper>
+      <LongPressWrapper
+        defaultStyle={defaultStyle}
+        longPressHandler={longPressHandler}
+      >
+        <ClickWrapper onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}>
+          {children}
+        </ClickWrapper>
+      </LongPressWrapper>
     </Wrapper>
   );
 }

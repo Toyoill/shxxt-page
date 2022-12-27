@@ -33,6 +33,7 @@ const FooterContainer = styled.div`
   }
 `;
 
+
 function Footer() {
   return (
     <FooterContainer>

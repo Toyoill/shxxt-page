@@ -1,25 +1,41 @@
 import React from "react";
 
+import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
+import { Provider } from "react-redux";
+import Layout from "./components/UI/Layout";
 import MainPage from "./page/Home/MainPage";
-import Header from "./components/UI/Header/Header";
-import Footer from "./components/UI/Footer/Footer";
-
-// import Sidebar from "./components/UI/Sidebar/Admin/Sidebar";
+import GuidePage from "./page/Guide/GuidePage";
+import SidebarWrapper from "./components/UI/Sidebar/Admin/SidebarWrapper";
+import store from "./store/rootReducer";
 
 const MainContainer = styled.div({
   width: "100vw",
-  height: 1000,
+  // height: 1000,
   backgroundColor: "#F5F2ED",
 });
 
 function App() {
   return (
-    <MainContainer>
-      <Header />
-      <MainPage />
-      <Footer />
-    </MainContainer>
+    // 최종 commit 전 되돌릴 코드
+    <Provider store={store}>
+      <MainContainer>
+        <SidebarWrapper />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/Guide" element={<GuidePage />} />
+          </Route>
+        </Routes>
+      </MainContainer>
+    </Provider>
+    /*
+    <div>
+      <Sidebar />
+      <Document />
+      <Test />
+    </div>
+    */
   );
 }
 

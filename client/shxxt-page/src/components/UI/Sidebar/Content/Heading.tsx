@@ -3,19 +3,20 @@ import styled from "styled-components";
 
 interface Props {
   title: string;
-  canClick?: boolean;
+  id?: number;
 }
 
-const StyledDiv = styled.div<{ canClick: boolean }>`
+const StyledDiv = styled.div`
   cursor: pointer;
   display: inline-block;
-  pointer-events: ${(props) => (props.canClick ? "true" : "false")};
+  font-size: 1rem;
 
   &:hover {
     text-decoration: underline;
   }
 `;
 
-export default function Heading({ title, canClick = true }: Props) {
-  return <StyledDiv canClick={canClick}>{title}</StyledDiv>;
+export default function Heading({ id, title }: Props) {
+  if (id) console.log(id);
+  return <StyledDiv>{title}</StyledDiv>;
 }

@@ -7,6 +7,7 @@ import Features from "./Feature";
 const ContentContainer = styled.div({
   display: "flex",
   flexDirection: "column",
+  paddingTop: "10rem",
   width: "100%",
   backgroundColor: "#F5F2ED",
 });

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledContainer = styled.div({
+  paddingTop: "10rem",
   display: "flex",
   flexDirection: "column",
   fontSize: "30px",

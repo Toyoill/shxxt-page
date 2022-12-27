@@ -1,42 +1,102 @@
-import React, { useState } from "react";
+import React, { MouseEvent, useRef, useState } from "react";
 import styled from "styled-components";
 
 import HeadingWrapper from "./ContentWrapper/HeadingWrapper";
 import Heading from "../Content/Heading";
 import SubHeadingWrapper from "./ContentWrapper/SubHeadingWrapper";
 import SubHeading from "../Content/SubHeading";
+import Icon from "../Content/Icon";
 
-const ListWrapper = styled.li<{ longPressed: boolean }>`
-  background-color: ${(props) => (props.longPressed ? "#c5c5c5" : "")};
+import { useAppDispatch } from "../../../../store/hooks";
+import { openContext } from "../../../../store/sidebar/contextReducer";
+import { select, unselect } from "../../../../store/sidebar/selectReducer";
+import { Content } from "../../../../store/type";
+
+interface Props {
+  content: Content;
+  contextOpen: boolean;
+}
+
+const ListWrapper = styled.li<{ open: boolean; selected: boolean }>`
+  background-color: ${(props) => (props.selected ? "#cbcbcb" : "")};
   border-radius: 5px;
-  margin-block: 0.5rem;
+  margin-top: 0.3rem;
   list-style-type: none;
 
   & ol {
-    padding-left: 0.5rem;
+    padding-left: 0.8rem;
+    display: ${(props) => (props.open ? "" : "none")};
   }
 `;
 
-export default function List() {
-  const [longPressed, setLongPressed] = useState(false);
+export default function List({ content, contextOpen }: Props) {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState(false);
+  const canOpen = useRef(false);
+
+  const dispatch = useAppDispatch();
+
+  const selectHandler = () => {
+    dispatch(
+      select({
+        type: "Heading",
+        idx: content.data.idx,
+        updateId: content.updateId === undefined ? undefined : content.updateId,
+      })
+    );
+  };
+
+  const longPressHandler = (longPressed: boolean) => {
+    if (longPressed) {
+      canOpen.current = true;
+      setSelected(true);
+      selectHandler();
+    }
+  };
+
+  const contextMenuHandler = (evt: MouseEvent) => {
+    evt.stopPropagation();
+    if (!selected) {
+      dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
+      selectHandler();
+    }
+  };
+
+  const mouseUpHandler = (evt: MouseEvent) => {
+    if (evt.button === 0) {
+      if (selected) {
+        setSelected(false);
+        if (!contextOpen) dispatch(unselect());
+      } else setOpen((prev) => !prev);
+    }
+  };
+
+  const subHeadings = content.subHeadings?.map((subHeading) => (
+    <SubHeadingWrapper
+      content={subHeading}
+      contextOpen={contextOpen}
+      key={subHeading.data.idx}
+      parentSelected={selected}
+      parentContextHandler={contextMenuHandler}
+    >
+      <SubHeading>{subHeading.data.main}</SubHeading>
+    </SubHeadingWrapper>
+  ));
+
   return (
-    <ListWrapper longPressed={longPressed}>
-      <details>
-        <HeadingWrapper longPressed={longPressed} onLongPress={setLongPressed}>
-          <Heading title="Awesome title" />
-        </HeadingWrapper>
-        <ol>
-          <SubHeadingWrapper>
-            <SubHeading>Awesome post</SubHeading>
-          </SubHeadingWrapper>
-          <SubHeadingWrapper>
-            <SubHeading>Awesome post</SubHeading>
-          </SubHeadingWrapper>
-          <SubHeadingWrapper>
-            <SubHeading>Awesome post</SubHeading>
-          </SubHeadingWrapper>
-        </ol>
-      </details>
+    <ListWrapper
+      open={open}
+      selected={selected}
+      onContextMenu={contextMenuHandler}
+    >
+      <HeadingWrapper
+        longPressHandler={longPressHandler}
+        mouseUpHandler={mouseUpHandler}
+      >
+        <Icon open={open} />
+        <Heading title={content.data.main} />
+      </HeadingWrapper>
+      <ol>{subHeadings}</ol>
     </ListWrapper>
   );
 }
