@@ -11,7 +11,7 @@ const SidebarContainer = styled.nav`
   left: 0px;
   position: fixed;
   width: 16vw;
-  z-index: 10;
+  z-index: 1;
 `;
 
 export default function Sidebar() {

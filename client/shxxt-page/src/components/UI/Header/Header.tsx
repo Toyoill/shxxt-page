@@ -16,6 +16,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   height: 6rem;
   background-color: #7c5fe6;
+  z-index: 2;
   .wrapper {
     display: flex;
     width: 96%;
