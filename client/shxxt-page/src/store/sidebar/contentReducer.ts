@@ -2,9 +2,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ContentState } from "../type";
 
-import addDataAction from "./contentReducerActions./addDataAction";
-import removeDataAction from "./contentReducerActions./removeDataAction";
-import renameDataAction from "./contentReducerActions./renameDataActoin";
+import addDataAction from "./contentReducerActions/addDataAction";
+import removeDataAction from "./contentReducerActions/removeDataAction";
+import renameDataAction from "./contentReducerActions/renameDataActoin";
 
 const initialState: ContentState = {
   contents: [],

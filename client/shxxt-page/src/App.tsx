@@ -6,8 +6,9 @@ import { Provider } from "react-redux";
 import Layout from "./components/UI/Layout";
 import MainPage from "./page/Home/MainPage";
 import GuidePage from "./page/Guide/GuidePage";
-import SidebarWrapper from "./components/UI/Sidebar/Admin/SidebarWrapper";
+// import SidebarWrapper from "./components/UI/Sidebar/Admin/SidebarWrapper";
 import store from "./store/rootReducer";
+import Document from "./page/Document/Admin/Document";
 
 const MainContainer = styled.div({
   width: "100vw",
@@ -20,7 +21,6 @@ function App() {
     // 최종 commit 전 되돌릴 코드
     <Provider store={store}>
       <MainContainer>
-        <SidebarWrapper />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<MainPage />} />
@@ -28,6 +28,9 @@ function App() {
           </Route>
         </Routes>
       </MainContainer>
+      <Routes>
+        <Route path="/Admin" element={<Document />} />
+      </Routes>
     </Provider>
     /*
     <div>

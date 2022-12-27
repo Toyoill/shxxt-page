@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 interface PropsType {
   title: string;
+  link: string;
 }
 
 const StyledButton = styled.button({
@@ -33,7 +34,7 @@ const StyledNav = styled.nav({
   marginRight: "auto",
 });
 
-function Button({ title }: PropsType) {
+function Button({ title, link }: PropsType) {
   /*
   const navigate = useNavigate();
 
@@ -44,7 +45,7 @@ function Button({ title }: PropsType) {
 
   return (
     <StyledNav>
-      <Link to="/Guide">
+      <Link to={link}>
         <StyledButton>{title}</StyledButton>
       </Link>
     </StyledNav>
