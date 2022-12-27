@@ -9,7 +9,6 @@ const ContentContainer = styled.div({
   flexDirection: "column",
   paddingTop: "10rem",
   width: "100%",
-  height: "1000px",
   backgroundColor: "#F5F2ED",
 });
 
