@@ -35,7 +35,7 @@ export default function List({ content }: Props) {
 
   const subHeadings = content.subHeadings?.map((subHeading) => (
     <SubHeadingWrapper key={subHeading.data.idx}>
-      <SubHeading>{subHeading.data.main}</SubHeading>
+      <SubHeading>{subHeading.data.title}</SubHeading>
     </SubHeadingWrapper>
   ));
 
@@ -43,7 +43,7 @@ export default function List({ content }: Props) {
     <ListWrapper open={open}>
       <HeadingWrapper mouseUpHandler={mouseUpHandler}>
         <Icon open={open} />
-        <Heading title={content.data.main} />
+        <Heading title={content.data.title} />
       </HeadingWrapper>
       <ol>{subHeadings}</ol>
     </ListWrapper>

@@ -10,6 +10,7 @@ const initialState: ContentState = {
   contents: [],
   updatedContents: [],
   updateId: 0,
+  contentId: 0;
 };
 
 export const contextSlice = createSlice({

@@ -42,7 +42,7 @@ export default function SidebarInner() {
         parentContextHandler={() => {}}
         parentSelected={false}
       >
-        <SubHeading>{content.data.main}</SubHeading>
+        <SubHeading>{content.data.title}</SubHeading>
       </SubHeadingWrapper>
     );
   });

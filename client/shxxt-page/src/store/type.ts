@@ -15,9 +15,10 @@ export interface Pos {
 }
 
 export interface Data {
+  id: number;
   type: "Heading" | "SubHeading";
   idx: number;
-  main: string;
+  title: string;
   belongTo?: number;
 }
 
@@ -31,5 +32,6 @@ export interface Content {
 export interface ContentState {
   contents: Array<Content>;
   updatedContents: Array<Content>;
+  contentId: number;
   updateId: number;
 }
