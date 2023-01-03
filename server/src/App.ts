@@ -7,4 +7,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.listen(3000);
+app.use("/ref", refRouter);
+
+app.use("/", () => console.log("connected"));
+
+app.listen(4000);

@@ -1,4 +1,4 @@
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useEffect } from "react";
 import styled from "styled-components";
 
 import List from "./List";
@@ -8,6 +8,7 @@ import SubHeadingWrapper from "./ContentWrapper/SubHeadingWrapper";
 import { useAppSelector, useAppDispatch } from "../../../../store/hooks";
 import { openContext } from "../../../../store/sidebar/contextReducer";
 import EditBar from "./EditBar";
+import { fetchData } from "../../../../store/sidebar/contentReducer";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -24,6 +25,10 @@ export default function SidebarInner() {
   const contents = useAppSelector((state) => state.content.contents);
   const contextOpen = useAppSelector((state) => state.context.open);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
 
   const main = contents.map((content) => {
     if (content.data.type === "Heading")

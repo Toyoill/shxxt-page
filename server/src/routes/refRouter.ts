@@ -1,7 +1,9 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+
+import getAll from "../controller/refController";
 
 const refRotuer = Router();
 
-refRotuer.get("/all", (req: Request, res: Response) => {});
+refRotuer.get("/all", getAll);
 
 export default refRotuer;
