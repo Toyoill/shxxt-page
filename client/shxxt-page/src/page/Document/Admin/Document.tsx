@@ -9,8 +9,8 @@ const DocumentWrapper = styled.div`
   position: relative;
   justify-content: space-around;
   height: 100vh;
-  width: 84vw;
-  padding-left: 16vw;
+  width: 100vw - 18rem;
+  padding-left: 18rem;
 `;
 
 const EditerWrapper = styled.div`
@@ -18,7 +18,7 @@ const EditerWrapper = styled.div`
   box-shadow: 0px 0px 8px rgb(0 0 0 / 10%);
   padding-bottom: 4rem;
   position: relative;
-  width: 42vw;
+  width: 50%;
 
   & > textarea {
     background-color: #ffffff;
@@ -31,7 +31,7 @@ const EditerWrapper = styled.div`
     outline: none;
     padding: 1rem;
     resize: none;
-    width: inherit;
+    width: 100%;
   }
 `;
 
@@ -43,7 +43,7 @@ const MarkdownWrapper = styled.div`
   line-height: 1.5;
   overflow-y: scroll;
   padding: 1rem;
-  width: 42vw;
+  width: 50%;
   word-wrap: break-word;
 `;
 

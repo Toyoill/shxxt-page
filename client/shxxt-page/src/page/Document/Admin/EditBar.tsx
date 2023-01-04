@@ -13,7 +13,7 @@ const EditBarWrapper = styled.div`
   left: 0;
   padding: 1rem;
   position: absolute;
-  width: inherit;
+  width: 100%;
   z-index: 9;
 `;
 
