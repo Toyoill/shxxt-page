@@ -41,7 +41,9 @@ export default function SubHeadingWrapper({
         type: "SubHeading",
         idx: content.data.idx,
         belongs:
-          content.data.belong === undefined ? undefined : content.data.belong,
+          content.data.belongTo === undefined
+            ? undefined
+            : content.data.belongTo,
         updateId: content.updateId === undefined ? undefined : content.updateId,
       })
     );

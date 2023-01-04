@@ -26,7 +26,7 @@ export default function SidebarInner() {
       return <List key={content.data.idx} content={content} />;
     return (
       <SubHeadingWrapper key={content.data.idx}>
-        <SubHeading>{content.data.title}</SubHeading>
+        <SubHeading>{content.data.main}</SubHeading>
       </SubHeadingWrapper>
     );
   });

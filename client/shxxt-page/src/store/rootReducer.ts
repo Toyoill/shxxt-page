@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import contentReducer from "./sidebar/contentReducer";
 
 import contextReducer from "./sidebar/contextReducer";
 import selectReducer from "./sidebar/selectReducer";
-import contentReducer from "./sidebar/contentReducer";
 
 const store = configureStore({
   reducer: {
