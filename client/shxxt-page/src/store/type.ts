@@ -15,10 +15,11 @@ export interface Pos {
 }
 
 export interface Data {
+  id: number;
   type: "Heading" | "SubHeading";
   idx: number;
-  main: string;
-  belongTo?: number;
+  title: string;
+  belong: number;
 }
 
 export interface Content {
@@ -31,5 +32,6 @@ export interface Content {
 export interface ContentState {
   contents: Array<Content>;
   updatedContents: Array<Content>;
+  contentId: number;
   updateId: number;
 }

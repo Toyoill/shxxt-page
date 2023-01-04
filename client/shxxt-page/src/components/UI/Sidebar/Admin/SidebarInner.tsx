@@ -1,13 +1,16 @@
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useEffect } from "react";
 import styled from "styled-components";
 
+import { useDispatch } from "react-redux";
 import List from "./List";
 import SubHeading from "../Content/SubHeading";
 import SubHeadingWrapper from "./ContentWrapper/SubHeadingWrapper";
 
-import { useAppSelector, useAppDispatch } from "../../../../store/hooks";
+import { useAppSelector } from "../../../../store/hooks";
 import { openContext } from "../../../../store/sidebar/contextReducer";
 import EditBar from "./EditBar";
+import { fetchData } from "../../../../store/sidebar/contentReducer";
+import { AppDispatch } from "../../../../store/rootReducer";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -23,7 +26,12 @@ const MainWrapper = styled.ol`
 export default function SidebarInner() {
   const contents = useAppSelector((state) => state.content.contents);
   const contextOpen = useAppSelector((state) => state.context.open);
-  const dispatch = useAppDispatch();
+
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
 
   const main = contents.map((content) => {
     if (content.data.type === "Heading")
@@ -42,7 +50,7 @@ export default function SidebarInner() {
         parentContextHandler={() => {}}
         parentSelected={false}
       >
-        <SubHeading>{content.data.main}</SubHeading>
+        <SubHeading>{content.data.title}</SubHeading>
       </SubHeadingWrapper>
     );
   });
