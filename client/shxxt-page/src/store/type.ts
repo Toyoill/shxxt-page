@@ -1,8 +1,7 @@
 export interface Selected {
   type: "Heading" | "SubHeading";
   idx: number;
-  belongs?: number;
-  updateId?: number;
+  belong: number;
 }
 
 export interface SelectState {
@@ -25,13 +24,21 @@ export interface Data {
 export interface Content {
   data: Data;
   subHeadings: Array<Content>;
-  updateId?: number;
+}
+
+export interface UpdatedData {
+  id: number;
+  idx?: number;
+  title?: string;
+  belong?: number;
 }
 
 // updateId === -1 : removed
 export interface ContentState {
   contents: Array<Content>;
-  updatedContents: Array<Content>;
+
+  newDatas: Array<Data>;
+  updatedDatas: Array<UpdatedData>;
+
   contentId: number;
-  updateId: number;
 }

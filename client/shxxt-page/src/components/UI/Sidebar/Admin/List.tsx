@@ -41,7 +41,7 @@ export default function List({ content, contextOpen }: Props) {
       select({
         type: "Heading",
         idx: content.data.idx,
-        updateId: content.updateId === undefined ? undefined : content.updateId,
+        belong: content.data.belong,
       })
     );
   };

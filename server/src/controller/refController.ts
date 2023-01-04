@@ -10,10 +10,12 @@ export default function getAll(req: Request, res: Response) {
     "SELECT * FROM content_menu ORDER BY belong, idx",
     (err, result) => {
       if (err) return res.sendStatus(400);
+
       pool.query("SELECT COUNT(*) FROM content_menu", (cntErr, cntResult) => {
         if (cntErr) return res.sendStatus(400);
+        console.log(cntResult.rows[0]);
         res.status(200);
-        res.json(JSON.stringify([cntResult.rows[0], result.rows]));
+        res.json(JSON.stringify([+cntResult.rows[0].count + 1, result.rows]));
       });
     }
   );

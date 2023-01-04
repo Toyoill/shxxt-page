@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import SimpleLineIcon from "react-simple-line-icons";
 
-import { useAppSelector } from "../../../../store/hooks";
-
 const EditContainer = styled.div`
   background-color: #bdbdbd;
   border: 1px solid #acacac;
@@ -21,13 +19,9 @@ const EditContainer = styled.div`
 `;
 
 export default function EditBar() {
-  const updated = useAppSelector((state) => state.content.updatedContents);
-
   const saveHandler = () => {
     console.log("print...");
-    for (let idx = 0; idx < updated.length; idx += 1) {
-      console.log(updated[idx].data, updated[idx].updateId);
-    }
+
     console.log("...end");
   };
 

@@ -36,11 +36,8 @@ export default function InputBar() {
       dispatch(
         renameData({
           target: selected.idx,
-          main: newName.trim(),
-          belongTo:
-            selected.belongs === undefined ? undefined : selected.belongs,
-          updateId:
-            selected.updateId === undefined ? undefined : selected.updateId,
+          title: newName.trim(),
+          belong: selected.belong,
         })
       );
     }

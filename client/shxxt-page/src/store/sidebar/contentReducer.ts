@@ -9,8 +9,8 @@ import fetchData from "./contentReducerActions/fetchDataAction";
 
 const initialState: ContentState = {
   contents: [],
-  updatedContents: [],
-  updateId: 0,
+  newDatas: [],
+  updatedDatas: [],
   contentId: 0,
 };
 
@@ -24,7 +24,8 @@ export const contentSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchData.fulfilled, (state, action) => {
-      action.payload.forEach((data: Data) => {
+      [state.contentId] = action.payload;
+      action.payload[1].forEach((data: Data) => {
         const newContent = {
           data,
           subHeadings: [],

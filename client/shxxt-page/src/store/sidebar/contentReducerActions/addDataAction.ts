@@ -17,13 +17,12 @@ const addDataAction: CaseReducer<
       belong: -1,
     };
 
+    state.newDatas.push(newData);
+
     const newContent: Content = {
       data: newData,
-      updateId: state.updateId,
       subHeadings: [],
     };
-
-    state.updatedContents.push(newContent);
 
     state.contents.push(newContent);
   } else {
@@ -41,13 +40,12 @@ const addDataAction: CaseReducer<
       belong: -1,
     };
 
+    state.newDatas.push(newData);
+
     const newContent: Content = {
       data: newData,
-      updateId: state.updateId,
       subHeadings: [],
     };
-
-    state.updatedContents.push(newContent);
 
     if (target !== undefined) {
       newData.belong = target;
@@ -55,7 +53,6 @@ const addDataAction: CaseReducer<
     } else state.contents.push(newContent);
   }
 
-  state.updateId += 1;
   state.contentId += 1;
 };
 
