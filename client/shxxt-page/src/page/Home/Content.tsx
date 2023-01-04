@@ -9,7 +9,6 @@ const ContentContainer = styled.div({
   flexDirection: "column",
   paddingTop: "10rem",
   width: "100%",
-  height: "1000px",
   backgroundColor: "#F5F2ED",
 });
 
@@ -45,11 +44,11 @@ export default function Content() {
       <BlueText>Shxxt-Maker</BlueText>
       <Info>데이터 관리를 더 쉽게.</Info>
       <Example />
-      <Button title="Install 1.0.0" />
+      <Button title="Go to Admin" link="/Admin" />
       <GreyText>Features</GreyText>
       <Features />
       <GreyText>로컬 데이터의 빠른 코드 변환, 지금 당장 시작하세요.</GreyText>
-      <Button title="Get Started!" />
+      <Button title="Get Started!" link="/Guide" />
     </ContentContainer>
   );
 }

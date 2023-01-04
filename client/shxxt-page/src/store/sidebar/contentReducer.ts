@@ -7,6 +7,7 @@ import removeDataAction from "./contentReducerActions./removeDataAction";
 import renameDataAction from "./contentReducerActions./renameDataActoin";
 import fetchData from "./contentReducerActions./fetchDataAction";
 
+
 const initialState: ContentState = {
   contents: [],
   updatedContents: [],

@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import Sidebar from "../../components/UI/Sidebar/Admin/SidebarWrapper";
 
 const StyledContainer = styled.div({
-  paddingTop: "10rem",
+  paddingTop: "6rem",
   display: "flex",
   flexDirection: "column",
   fontSize: "30px",
@@ -12,6 +13,7 @@ const StyledContainer = styled.div({
 function GuidePage() {
   return (
     <StyledContainer>
+      <Sidebar />
       <p>짱구야, 가이드 가르쳐 준다며.</p>
       <img
         src="https://pbs.twimg.com/media/FXXmyjrUIAUfXu1?format=jpg&name=medium"
