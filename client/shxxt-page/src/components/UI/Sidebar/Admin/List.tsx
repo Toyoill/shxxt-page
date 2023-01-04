@@ -79,7 +79,7 @@ export default function List({ content, contextOpen }: Props) {
       parentSelected={selected}
       parentContextHandler={contextMenuHandler}
     >
-      <SubHeading>{subHeading.data.title}</SubHeading>
+      <SubHeading>{subHeading.data.main}</SubHeading>
     </SubHeadingWrapper>
   ));
 
@@ -94,7 +94,7 @@ export default function List({ content, contextOpen }: Props) {
         mouseUpHandler={mouseUpHandler}
       >
         <Icon open={open} />
-        <Heading title={content.data.title} />
+        <Heading title={content.data.main} />
       </HeadingWrapper>
       <ol>{subHeadings}</ol>
     </ListWrapper>

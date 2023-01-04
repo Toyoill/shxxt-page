@@ -1,21 +1,18 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
-import { ContentState, Data } from "../type";
+import { ContentState } from "../type";
 
-import addDataAction from "./contentReducerActions./addDataAction";
-import removeDataAction from "./contentReducerActions./removeDataAction";
-import renameDataAction from "./contentReducerActions./renameDataActoin";
-import fetchData from "./contentReducerActions./fetchDataAction";
-
+import addDataAction from "./contentReducerActions/addDataAction";
+import removeDataAction from "./contentReducerActions/removeDataAction";
+import renameDataAction from "./contentReducerActions/renameDataActoin";
 
 const initialState: ContentState = {
   contents: [],
   updatedContents: [],
   updateId: 0,
-  contentId: 0,
 };
 
-export const contentSlice = createSlice({
+export const contextSlice = createSlice({
   name: "content",
   initialState,
   reducers: {
@@ -23,21 +20,8 @@ export const contentSlice = createSlice({
     removeData: removeDataAction,
     renameData: renameDataAction,
   },
-  extraReducers(builder) {
-    builder.addCase(fetchData.fulfilled, (state, action) => {
-      action.payload.forEach((data: Data) => {
-        const newContent = {
-          data,
-          subHeadings: [],
-        };
-        if (data.belong === -1) state.contents.push(newContent);
-        else state.contents[data.belong].subHeadings.push(newContent);
-      });
-    });
-  },
 });
 
-export const { addData, removeData, renameData } = contentSlice.actions;
-export { fetchData };
+export const { addData, removeData, renameData } = contextSlice.actions;
 
-export default contentSlice.reducer;
+export default contextSlice.reducer;

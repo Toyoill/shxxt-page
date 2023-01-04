@@ -16,24 +16,24 @@ const renameDataAction: CaseReducer<
   if (updateId !== undefined) {
     state.updatedContents.find((content) => {
       if (content.updateId === updateId) {
-        content.data.title = main;
+        content.data.main = main;
         return true;
       }
       return false;
     });
     if (belongTo === undefined) {
-      state.contents[target].data.title = main;
+      state.contents[target].data.main = main;
     } else {
-      state.contents[belongTo].subHeadings[target].data.title = main;
+      state.contents[belongTo].subHeadings[target].data.main = main;
     }
   } else if (belongTo === undefined) {
-    state.contents[target].data.title = main;
+    state.contents[target].data.main = main;
 
     state.contents[target].updateId = state.updateId;
     state.updateId += 1;
     state.updatedContents.push(state.contents[target]);
   } else {
-    state.contents[belongTo].subHeadings[target].data.title = main;
+    state.contents[belongTo].subHeadings[target].data.main = main;
 
     state.contents[target].subHeadings[target].updateId = state.updateId;
     state.updateId += 1;
