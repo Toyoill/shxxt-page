@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import EditBar from "./EditBar";
 import Sidebar from "../../../components/UI/Sidebar/Admin/SidebarWrapper";
 
@@ -75,7 +77,30 @@ export default function Document() {
       </EditerWrapper>
       <MarkdownWrapper>
         <div>
-          <ReactMarkdown unwrapDisallowed>{article}</ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              // eslint-disable-next-line react/no-unstable-nested-components
+              code({ node, inline, className, children, style, ...props }) {
+                const match = /language-(\w+)/.exec(className || "");
+                return !inline && match ? (
+                  <SyntaxHighlighter
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                  >
+                    {String(children).replace(/\n$/, "")}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+            unwrapDisallowed
+          >
+            {article}
+          </ReactMarkdown>
         </div>
       </MarkdownWrapper>
     </DocumentWrapper>

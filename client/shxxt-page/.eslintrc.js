@@ -26,5 +26,7 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
   },
 };
