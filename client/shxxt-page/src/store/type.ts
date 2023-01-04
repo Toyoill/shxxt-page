@@ -19,7 +19,7 @@ export interface Data {
   type: "Heading" | "SubHeading";
   idx: number;
   title: string;
-  belongTo?: number;
+  belong: number;
 }
 
 export interface Content {

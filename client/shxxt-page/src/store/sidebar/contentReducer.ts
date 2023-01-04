@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
-import { ContentState } from "../type";
+import { ContentState, Data } from "../type";
 
 import addDataAction from "./contentReducerActions./addDataAction";
 import removeDataAction from "./contentReducerActions./removeDataAction";
@@ -24,7 +24,14 @@ export const contentSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchData.fulfilled, (state, action) => {
-      console.log(action.payload);
+      action.payload.forEach((data: Data) => {
+        const newContent = {
+          data,
+          subHeadings: [],
+        };
+        if (data.belong === -1) state.contents.push(newContent);
+        else state.contents[data.belong].subHeadings.push(newContent);
+      });
     });
   },
 });

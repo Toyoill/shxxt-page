@@ -14,6 +14,7 @@ const addDataAction: CaseReducer<
       type,
       idx: state.contents.length,
       title: "새 그룹",
+      belong: -1,
     };
 
     const newContent: Content = {
@@ -37,6 +38,7 @@ const addDataAction: CaseReducer<
       type,
       idx: newIdx,
       title: "새 글",
+      belong: -1,
     };
 
     const newContent: Content = {
@@ -48,7 +50,7 @@ const addDataAction: CaseReducer<
     state.updatedContents.push(newContent);
 
     if (target !== undefined) {
-      newData.belongTo = target;
+      newData.belong = target;
       state.contents[target].subHeadings?.push(newContent);
     } else state.contents.push(newContent);
   }
