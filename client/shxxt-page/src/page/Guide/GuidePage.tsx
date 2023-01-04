@@ -3,7 +3,7 @@ import styled from "styled-components";
 import SidebarWrapper from "../../components/UI/Sidebar/Admin/SidebarWrapper";
 
 const StyledContainer = styled.div({
-  paddingTop: "10rem",
+  paddingTop: "6rem",
   display: "flex",
   flexDirection: "column",
   fontSize: "30px",

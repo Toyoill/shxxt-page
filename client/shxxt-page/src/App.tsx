@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { Provider } from "react-redux";
 import Layout from "./components/UI/Layout";
@@ -23,7 +23,8 @@ function App() {
       <MainContainer>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<MainPage />} />
+            <Route path="/" element={<Navigate to="/Home" />} />
+            <Route path="/Home" element={<MainPage />} />
             <Route path="/Guide" element={<GuidePage />} />
           </Route>
         </Routes>
