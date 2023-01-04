@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SidebarWrapper from "../../components/UI/Sidebar/Admin/SidebarWrapper";
 
+
 const StyledContainer = styled.div({
   paddingTop: "6rem",
   display: "flex",

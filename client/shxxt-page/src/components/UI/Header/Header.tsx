@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 // import Menu from "./Menu";
+
 const HeaderContainer = styled.div`
   /* position: "fixed";
   top: 0;
@@ -53,11 +54,13 @@ const HeaderContainer = styled.div`
     }
   }
 `;
+
 // const MenuContainer = styled.div`
 //   top: "100px";
 //   left: "100px";
 //   width: "100%";
 // `;
+
 function Header() {
   const pages = ["Home", "Guide", "Design", "Reference"];
   // const [selectedPage, setSelectedPage] = useState("Home");
@@ -72,6 +75,7 @@ function Header() {
   //     </MenuContainer>
   //   </HeaderContainer>
   // );
+
   return (
     <HeaderContainer>
       <div className="wrapper">
