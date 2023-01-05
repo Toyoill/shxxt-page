@@ -42,4 +42,6 @@ export interface ContentState {
   updatedDatas: Array<UpdatedData>;
 
   contentId: number;
+
+  saving: boolean;
 }

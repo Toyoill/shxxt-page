@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import SimpleLineIcon from "react-simple-line-icons";
+import axios from "axios";
+import { useAppSelector } from "../../../../store/hooks";
 
 const EditContainer = styled.div`
   background-color: #bdbdbd;
@@ -19,10 +21,18 @@ const EditContainer = styled.div`
 `;
 
 export default function EditBar() {
-  const saveHandler = () => {
-    console.log("print...");
+  const updatedDatas = useAppSelector((state) => state.content.updatedDatas);
+  const newDatas = useAppSelector((state) => state.content.newDatas);
 
-    console.log("...end");
+  const saveHandler = async () => {
+    await axios({
+      method: "post",
+      url: "http://localhost:4000/ref/save",
+      data: {
+        updatedDatas,
+        newDatas,
+      },
+    });
   };
 
   return (

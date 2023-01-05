@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
 import pool from "../model/db";
 
-export default function getAll(req: Request, res: Response) {
+export function getAll(req: Request, res: Response) {
   // CORS 해결 코드, 다른 방식으로 해결하여 지울것
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
 
-  console.log("fetching...");
   pool.query(
     "SELECT * FROM content_menu ORDER BY belong, idx",
     (err, result) => {
@@ -19,4 +18,10 @@ export default function getAll(req: Request, res: Response) {
       });
     }
   );
+}
+
+export function postChanges(req: Request, res: Response) {
+  req.body.newDatas.forEach((data) => {
+    pool.query("INSERT INTO ", (err) => {});
+  });
 }

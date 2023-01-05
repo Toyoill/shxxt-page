@@ -5,6 +5,7 @@ import { ContentState, Data } from "../type";
 import addDataAction from "./contentReducerActions/addDataAction";
 import removeDataAction from "./contentReducerActions/removeDataAction";
 import renameDataAction from "./contentReducerActions/renameDataActoin";
+import saveDataAction from "./contentReducerActions/saveDataAction";
 import fetchData from "./contentReducerActions/fetchDataAction";
 
 const initialState: ContentState = {
@@ -12,6 +13,7 @@ const initialState: ContentState = {
   newDatas: [],
   updatedDatas: [],
   contentId: 0,
+  saving: false,
 };
 
 export const contentSlice = createSlice({
@@ -21,6 +23,7 @@ export const contentSlice = createSlice({
     addData: addDataAction,
     removeData: removeDataAction,
     renameData: renameDataAction,
+    saveData: saveDataAction,
   },
   extraReducers(builder) {
     builder.addCase(fetchData.fulfilled, (state, action) => {
@@ -37,7 +40,8 @@ export const contentSlice = createSlice({
   },
 });
 
-export const { addData, removeData, renameData } = contentSlice.actions;
+export const { addData, removeData, renameData, saveData } =
+  contentSlice.actions;
 export { fetchData };
 
 export default contentSlice.reducer;
