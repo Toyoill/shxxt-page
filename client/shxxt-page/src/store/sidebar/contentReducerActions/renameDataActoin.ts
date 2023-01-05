@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { CaseReducer, PayloadAction } from "@reduxjs/toolkit";
-import { ContentState } from "../../type";
+import { ContentState, UpdatedData } from "../../type";
 
 const renameDataAction: CaseReducer<
   ContentState,
@@ -11,7 +11,30 @@ const renameDataAction: CaseReducer<
   }>
 > = (state, action) => {
   const { target, title, belong } = action.payload;
-  console.log(target, title, belong);
+
+  const updateTitle = (id: number, value?: string) => {
+    const updatingIdx = state.updatedDatas.findIndex((data) => data.id === id);
+
+    if (updatingIdx === -1) {
+      const newUpdate: UpdatedData = {
+        id,
+        title: value,
+      };
+
+      state.updatedDatas.push(newUpdate);
+    } else state.updatedDatas[updatingIdx].removed = true;
+  };
+
+  let updatingId: number;
+  if (belong === -1) {
+    state.contents[target].data.title = title;
+    updatingId = state.contents[target].data.id;
+  } else {
+    state.contents[belong].subHeadings[target].data.title = title;
+    updatingId = state.contents[belong].subHeadings[target].data.id;
+  }
+
+  updateTitle(updatingId, title);
 };
 
 export default renameDataAction;

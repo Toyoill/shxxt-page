@@ -31,6 +31,7 @@ export interface UpdatedData {
   idx?: number;
   title?: string;
   belong?: number;
+  removed?: boolean;
 }
 
 // updateId === -1 : removed
