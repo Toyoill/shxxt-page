@@ -10,18 +10,16 @@ const StyledContainer = styled.div({
   textAlign: "center",
 });
 
-function GuidePage() {
+export default function DesignPage() {
   return (
     <StyledContainer>
       <SidebarWrapper />
-      <p>짱구야, 가이드 가르쳐 준다며.</p>
+      <p>짱구야, 디자인 페이지 만들었다며.</p>
       <img
         src="https://pbs.twimg.com/media/FXXmyjrUIAUfXu1?format=jpg&name=medium"
         alt=""
       />
-      <strong>아빠를 속인거니?</strong>
+      <strong>아빠를 또속인거니?</strong>
     </StyledContainer>
   );
 }
-
-export default GuidePage;

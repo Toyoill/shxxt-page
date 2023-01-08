@@ -83,9 +83,9 @@ function Header() {
         <nav className="nav">
           <ul className="ul">
             {pages.map((page) => (
-              <li key={page}>
-                <NavLink to={page}>{page}</NavLink>
-              </li>
+              <NavLink key={page} to={page}>
+                <li key={page}>{page}</li>
+              </NavLink>
             ))}
           </ul>
         </nav>
