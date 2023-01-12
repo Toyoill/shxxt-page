@@ -14,7 +14,6 @@ const renameDataAction: CaseReducer<
 
   const updateTitle = (id: number, value?: string) => {
     const updatingIdx = state.updatedDatas.findIndex((data) => data.id === id);
-
     if (updatingIdx === -1) {
       const newUpdate: UpdatedData = {
         id,
@@ -22,7 +21,9 @@ const renameDataAction: CaseReducer<
       };
 
       state.updatedDatas.push(newUpdate);
-    } else state.updatedDatas[updatingIdx].removed = true;
+    } else {
+      state.updatedDatas[updatingIdx].title = title;
+    }
   };
 
   let updatingId: number;

@@ -56,6 +56,7 @@ export default function List({ content, contextOpen }: Props) {
 
   const contextMenuHandler = (evt: MouseEvent) => {
     evt.stopPropagation();
+    evt.preventDefault();
     if (!selected) {
       dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
       selectHandler();
@@ -74,7 +75,6 @@ export default function List({ content, contextOpen }: Props) {
   const subHeadings = content.subHeadings?.map((subHeading) => (
     <SubHeadingWrapper
       content={subHeading}
-      contextOpen={contextOpen}
       key={subHeading.data.idx}
       parentSelected={selected}
       parentContextHandler={contextMenuHandler}

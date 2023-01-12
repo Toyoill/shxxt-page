@@ -32,6 +32,7 @@ export default function InputBar() {
   const dispatch = useAppDispatch();
 
   const submitHandler = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
     if (selected !== undefined && newName.trim().length > 0) {
       dispatch(
         renameData({
@@ -44,7 +45,6 @@ export default function InputBar() {
     setNewName("");
     dispatch(closeContext());
     dispatch(unselect());
-    evt.preventDefault();
   };
 
   const changeHandler = (evt: React.ChangeEvent<HTMLInputElement>) => {

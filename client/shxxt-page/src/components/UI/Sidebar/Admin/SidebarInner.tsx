@@ -11,6 +11,7 @@ import { openContext } from "../../../../store/sidebar/contextReducer";
 import EditBar from "./EditBar";
 import { fetchData } from "../../../../store/sidebar/contentReducer";
 import { AppDispatch } from "../../../../store/rootReducer";
+import { select } from "../../../../store/sidebar/selectReducer";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -45,7 +46,6 @@ export default function SidebarInner() {
     return (
       <SubHeadingWrapper
         key={content.data.idx}
-        contextOpen={contextOpen}
         content={content}
         parentContextHandler={() => {}}
         parentSelected={false}
@@ -57,6 +57,7 @@ export default function SidebarInner() {
 
   const contextHandler = (evt: MouseEvent) => {
     evt.preventDefault();
+    dispatch(select(undefined));
     dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
   };
 
