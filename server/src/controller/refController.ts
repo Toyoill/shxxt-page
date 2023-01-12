@@ -33,7 +33,10 @@ export async function postChanges(req: Request, res: Response) {
   try {
     for (const data of req.body.updatedDatas as Array<UpdatedData>) {
       if (data.removed) {
-        await pool.query("DELETE FROM content_menu WHERE id = $1", [data.id]);
+        console.log(data.id);
+        await pool
+          .query("DELETE FROM content_menu WHERE id = $1", [data.id])
+          .catch((err) => console.log(err));
         continue;
       }
 
@@ -62,7 +65,8 @@ export async function postChanges(req: Request, res: Response) {
 
       await pool.query(queryString, queryData);
     }
-  } catch {
+  } catch (err) {
+    console.log(err);
     res.status(400).send("UPDATEERR");
   }
   res.status(200).end();
