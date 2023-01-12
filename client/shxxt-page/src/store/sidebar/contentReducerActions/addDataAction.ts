@@ -10,18 +10,19 @@ const addDataAction: CaseReducer<
 
   if (type === "Heading") {
     const newData: Data = {
+      id: state.contentId,
       type,
       idx: state.contents.length,
-      main: "새 그룹",
+      title: "새 그룹",
+      belong: -1,
     };
+
+    state.newDatas.push(newData);
 
     const newContent: Content = {
       data: newData,
-      updateId: state.updateId,
       subHeadings: [],
     };
-
-    state.updatedContents.push(newContent);
 
     state.contents.push(newContent);
   } else {
@@ -32,26 +33,27 @@ const addDataAction: CaseReducer<
     else newIdx = state.contents.length;
 
     const newData: Data = {
+      id: state.contentId,
       type,
       idx: newIdx,
-      main: "새 글",
+      title: "새 글",
+      belong: -1,
     };
+
+    state.newDatas.push(newData);
 
     const newContent: Content = {
       data: newData,
-      updateId: state.updateId,
       subHeadings: [],
     };
 
-    state.updatedContents.push(newContent);
-
     if (target !== undefined) {
-      newData.belongTo = target;
+      newData.belong = target;
       state.contents[target].subHeadings?.push(newContent);
     } else state.contents.push(newContent);
   }
 
-  state.updateId += 1;
+  state.contentId += 1;
 };
 
 export default addDataAction;

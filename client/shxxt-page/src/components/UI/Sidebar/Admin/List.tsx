@@ -41,7 +41,7 @@ export default function List({ content, contextOpen }: Props) {
       select({
         type: "Heading",
         idx: content.data.idx,
-        updateId: content.updateId === undefined ? undefined : content.updateId,
+        belong: content.data.belong,
       })
     );
   };
@@ -56,6 +56,7 @@ export default function List({ content, contextOpen }: Props) {
 
   const contextMenuHandler = (evt: MouseEvent) => {
     evt.stopPropagation();
+    evt.preventDefault();
     if (!selected) {
       dispatch(openContext({ x: evt.pageX, y: evt.pageY }));
       selectHandler();
@@ -74,12 +75,11 @@ export default function List({ content, contextOpen }: Props) {
   const subHeadings = content.subHeadings?.map((subHeading) => (
     <SubHeadingWrapper
       content={subHeading}
-      contextOpen={contextOpen}
       key={subHeading.data.idx}
       parentSelected={selected}
       parentContextHandler={contextMenuHandler}
     >
-      <SubHeading>{subHeading.data.main}</SubHeading>
+      <SubHeading>{subHeading.data.title}</SubHeading>
     </SubHeadingWrapper>
   ));
 
@@ -94,7 +94,7 @@ export default function List({ content, contextOpen }: Props) {
         mouseUpHandler={mouseUpHandler}
       >
         <Icon open={open} />
-        <Heading title={content.data.main} />
+        <Heading title={content.data.title} />
       </HeadingWrapper>
       <ol>{subHeadings}</ol>
     </ListWrapper>

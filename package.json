@@ -4,8 +4,5 @@
   "main": "index.js",
   "repository": "https://github.com/Toyoill/shxxt-page.git",
   "author": "N3wCP <61874428+Toyoill@users.noreply.github.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/react-syntax-highlighter": "^15.5.5"
-  }
+  "license": "MIT"
 }

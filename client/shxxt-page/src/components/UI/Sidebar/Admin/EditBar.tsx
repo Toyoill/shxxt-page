@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SimpleLineIcon from "react-simple-line-icons";
+import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { saveData } from "../../../../store/sidebar/contentReducer";
 
-import { useAppSelector } from "../../../../store/hooks";
-
-const EditContainer = styled.div`
+const EditContainer = styled.div<{ saving: boolean }>`
   background-color: #bdbdbd;
   border: 1px solid #acacac;
   border-radius: 3px;
@@ -21,20 +22,39 @@ const EditContainer = styled.div`
 `;
 
 export default function EditBar() {
-  const updated = useAppSelector((state) => state.content.updatedContents);
+  const [saving, setSaving] = useState(false);
+  const dispatch = useAppDispatch();
+  const updatedDatas = useAppSelector((state) => state.content.updatedDatas);
+  const newDatas = useAppSelector((state) => state.content.newDatas);
 
   const saveHandler = () => {
-    console.log("print...");
-    for (let idx = 0; idx < updated.length; idx += 1) {
-      console.log(updated[idx].data, updated[idx].updateId);
-    }
-    console.log("...end");
+    setSaving(true);
+    axios({
+      method: "post",
+      url: "http://localhost:4000/ref/save",
+      data: {
+        updatedDatas,
+        newDatas,
+      },
+    })
+      .then(() => {
+        dispatch(saveData());
+        // eslint-disable-next-line no-alert
+        alert("저장 완료!");
+      })
+      .catch(() => {
+        // eslint-disable-next-line no-alert
+        alert("저장 실패!");
+      })
+      .finally(() => {
+        setSaving(false);
+      });
   };
 
   return (
-    <EditContainer>
-      <button type="button">
-        <SimpleLineIcon name="cloud-upload" onClick={saveHandler} />
+    <EditContainer saving={saving}>
+      <button type="button" onClick={saveHandler} disabled={saving}>
+        <SimpleLineIcon name="cloud-upload" />
       </button>
     </EditContainer>
   );

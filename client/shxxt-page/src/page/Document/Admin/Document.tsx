@@ -1,8 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import EditBar from "./EditBar";
 import Sidebar from "../../../components/UI/Sidebar/Admin/SidebarWrapper";
 
@@ -11,8 +9,8 @@ const DocumentWrapper = styled.div`
   position: relative;
   justify-content: space-around;
   height: 100vh;
-  width: 84vw;
-  padding-left: 16vw;
+  width: 100vw - 18rem;
+  padding-left: 18rem;
 `;
 
 const EditerWrapper = styled.div`
@@ -20,7 +18,7 @@ const EditerWrapper = styled.div`
   box-shadow: 0px 0px 8px rgb(0 0 0 / 10%);
   padding-bottom: 4rem;
   position: relative;
-  width: 42vw;
+  width: 50%;
 
   & > textarea {
     background-color: #ffffff;
@@ -33,7 +31,7 @@ const EditerWrapper = styled.div`
     outline: none;
     padding: 1rem;
     resize: none;
-    width: inherit;
+    width: 100%;
   }
 `;
 
@@ -45,7 +43,7 @@ const MarkdownWrapper = styled.div`
   line-height: 1.5;
   overflow-y: scroll;
   padding: 1rem;
-  width: 42vw;
+  width: 50%;
   word-wrap: break-word;
 `;
 
@@ -77,30 +75,7 @@ export default function Document() {
       </EditerWrapper>
       <MarkdownWrapper>
         <div>
-          <ReactMarkdown
-            components={{
-              // eslint-disable-next-line react/no-unstable-nested-components
-              code({ node, inline, className, children, style, ...props }) {
-                const match = /language-(\w+)/.exec(className || "");
-                return !inline && match ? (
-                  <SyntaxHighlighter
-                    language={match[1]}
-                    PreTag="div"
-                    {...props}
-                  >
-                    {String(children).replace(/\n$/, "")}
-                  </SyntaxHighlighter>
-                ) : (
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                );
-              },
-            }}
-            unwrapDisallowed
-          >
-            {article}
-          </ReactMarkdown>
+          <ReactMarkdown unwrapDisallowed>{article}</ReactMarkdown>
         </div>
       </MarkdownWrapper>
     </DocumentWrapper>

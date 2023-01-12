@@ -11,8 +11,13 @@ interface Props {
 }
 
 const Wrapper = styled.div`
-  border-radius: "5px";
+  border-radius: 5px;
   width: 100%;
+  padding-block: 0.2rem;
+
+  & :hover {
+    background-color: #cfcfcf;
+  }
 `;
 
 const ClickWrapper = styled.div`

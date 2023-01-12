@@ -39,10 +39,7 @@ export default function Rename() {
       dispatch(
         removeData({
           target: selected.idx,
-          belongTo:
-            selected.belongs === undefined ? undefined : selected.belongs,
-          updateId:
-            selected.updateId === undefined ? undefined : selected.updateId,
+          belong: selected.belong,
         })
       );
     }

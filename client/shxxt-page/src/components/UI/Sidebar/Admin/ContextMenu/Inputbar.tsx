@@ -32,22 +32,19 @@ export default function InputBar() {
   const dispatch = useAppDispatch();
 
   const submitHandler = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
     if (selected !== undefined && newName.trim().length > 0) {
       dispatch(
         renameData({
           target: selected.idx,
-          main: newName.trim(),
-          belongTo:
-            selected.belongs === undefined ? undefined : selected.belongs,
-          updateId:
-            selected.updateId === undefined ? undefined : selected.updateId,
+          title: newName.trim(),
+          belong: selected.belong,
         })
       );
     }
     setNewName("");
     dispatch(closeContext());
     dispatch(unselect());
-    evt.preventDefault();
   };
 
   const changeHandler = (evt: React.ChangeEvent<HTMLInputElement>) => {

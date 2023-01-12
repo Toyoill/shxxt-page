@@ -1,44 +1,41 @@
 /* eslint-disable no-param-reassign */
 import { CaseReducer, PayloadAction } from "@reduxjs/toolkit";
-import { ContentState } from "../../type";
+import { ContentState, UpdatedData } from "../../type";
 
 const renameDataAction: CaseReducer<
   ContentState,
   PayloadAction<{
     target: number;
-    main: string;
-    belongTo?: number;
-    updateId?: number;
+    title: string;
+    belong: number;
   }>
 > = (state, action) => {
-  const { target, main, belongTo, updateId } = action.payload;
+  const { target, title, belong } = action.payload;
 
-  if (updateId !== undefined) {
-    state.updatedContents.find((content) => {
-      if (content.updateId === updateId) {
-        content.data.main = main;
-        return true;
-      }
-      return false;
-    });
-    if (belongTo === undefined) {
-      state.contents[target].data.main = main;
+  const updateTitle = (id: number, value?: string) => {
+    const updatingIdx = state.updatedDatas.findIndex((data) => data.id === id);
+    if (updatingIdx === -1) {
+      const newUpdate: UpdatedData = {
+        id,
+        title: value,
+      };
+
+      state.updatedDatas.push(newUpdate);
     } else {
-      state.contents[belongTo].subHeadings[target].data.main = main;
+      state.updatedDatas[updatingIdx].title = title;
     }
-  } else if (belongTo === undefined) {
-    state.contents[target].data.main = main;
+  };
 
-    state.contents[target].updateId = state.updateId;
-    state.updateId += 1;
-    state.updatedContents.push(state.contents[target]);
+  let updatingId: number;
+  if (belong === -1) {
+    state.contents[target].data.title = title;
+    updatingId = state.contents[target].data.id;
   } else {
-    state.contents[belongTo].subHeadings[target].data.main = main;
-
-    state.contents[target].subHeadings[target].updateId = state.updateId;
-    state.updateId += 1;
-    state.updatedContents.push(state.contents[target].subHeadings[target]);
+    state.contents[belong].subHeadings[target].data.title = title;
+    updatingId = state.contents[belong].subHeadings[target].data.id;
   }
+
+  updateTitle(updatingId, title);
 };
 
 export default renameDataAction;

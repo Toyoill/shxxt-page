@@ -1,79 +1,73 @@
 /* eslint-disable no-param-reassign */
 import { CaseReducer, PayloadAction } from "@reduxjs/toolkit";
-import { ContentState } from "../../type";
+import { ContentState, UpdatedData } from "../../type";
 
 const removeDataAction: CaseReducer<
   ContentState,
   PayloadAction<{
     target: number;
-    belongTo?: number;
-    updateId?: number;
+    belong: number;
   }>
 > = (state, action) => {
-  const { target, belongTo, updateId } = action.payload;
+  const { target, belong } = action.payload;
 
-  if (updateId !== undefined) {
-    state.updatedContents.find((content) => {
-      if (content.updateId === updateId) {
-        content.updateId = -1;
-        return true;
-      }
-      return false;
+  const update = (
+    id: number,
+    type: "idx" | "belong" | "remove",
+    value?: number
+  ) => {
+    const updatingIdx = state.updatedDatas.findIndex((data) => data.id === id);
+
+    if (updatingIdx === -1) {
+      const newUpdate: UpdatedData = {
+        id,
+      };
+
+      if (type === "idx" || type === "belong") newUpdate[type] = value;
+      else newUpdate.removed = true;
+      state.updatedDatas.push(newUpdate);
+    } else if (type === "idx" || type === "belong")
+      state.updatedDatas[updatingIdx][type] = value;
+    else state.updatedDatas[updatingIdx].removed = true;
+  };
+
+  let updatingArray: typeof state.contents;
+  let updatingDataId: number;
+
+  if (belong === -1) {
+    updatingDataId = state.contents[target].data.id;
+
+    state.contents[target].subHeadings.forEach((subContent) => {
+      update(subContent.data.id, "remove");
     });
-  } else if (belongTo === undefined) {
-    state.contents[target].updateId = -1;
-    state.updatedContents.push(state.contents[target]);
+
+    state.contents = state.contents.filter(
+      (content) => content.data.idx !== target
+    );
+
+    updatingArray = state.contents;
   } else {
-    state.contents[belongTo].subHeadings[target].updateId = -1;
-    state.updatedContents.push(state.contents[belongTo].subHeadings[target]);
+    updatingDataId = state.contents[belong].subHeadings[target].data.id;
+    state.contents[belong].subHeadings = state.contents[
+      belong
+    ].subHeadings.filter((content) => content.data.idx !== target);
+
+    updatingArray = state.contents[belong].subHeadings;
   }
 
-  if (belongTo === undefined) {
-    state.contents.splice(target, 1);
+  update(updatingDataId, "remove");
 
-    for (let idx = target; idx < state.contents.length; idx += 1) {
-      state.contents[idx].data.idx = idx;
+  updatingArray.forEach((content) => {
+    if (target < content.data.idx) {
+      content.data.idx -= 1;
+      update(content.data.id, "idx", content.data.idx);
 
-      if (state.contents[idx].updateId !== undefined) {
-        state.updatedContents.find((content) => {
-          if (content.updateId === state.contents[idx].updateId) {
-            content.data.idx = idx;
-            return true;
-          }
-          return false;
-        });
-      } else {
-        state.contents[idx].updateId = state.updateId;
-        state.updatedContents.push(state.contents[idx]);
-        state.updateId += 1;
-      }
+      content.subHeadings.forEach((subContent) => {
+        subContent.data.belong = content.data.idx;
+        update(subContent.data.id, "belong", content.data.idx);
+      });
     }
-  } else {
-    state.contents[belongTo].subHeadings.splice(target, 1);
-
-    const { length } = state.contents[belongTo].subHeadings;
-
-    for (let idx = target; idx < length; idx += 1) {
-      state.contents[belongTo].subHeadings[idx].data.idx = idx;
-
-      if (state.contents[belongTo].subHeadings[idx].updateId !== undefined) {
-        state.updatedContents.find((content) => {
-          if (
-            content.updateId ===
-            state.contents[belongTo].subHeadings[idx].updateId
-          ) {
-            content.data.idx = idx;
-            return true;
-          }
-          return false;
-        });
-      } else {
-        state.contents[belongTo].subHeadings[idx].updateId = state.updateId;
-        state.updatedContents.push(state.contents[belongTo].subHeadings[idx]);
-        state.updateId += 1;
-      }
-    }
-  }
+  });
 };
 
 export default removeDataAction;

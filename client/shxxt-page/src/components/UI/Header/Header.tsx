@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
 // import Menu from "./Menu";
 
 const HeaderContainer = styled.div`
@@ -45,6 +44,7 @@ const HeaderContainer = styled.div`
       background: #8b005d;
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
       cursor: pointer;
+
       &:hover,
       &:active {
         background: #ac0e77;
@@ -63,7 +63,9 @@ const HeaderContainer = styled.div`
 
 function Header() {
   const pages = ["Home", "Guide", "Design", "Reference"];
+
   // const [selectedPage, setSelectedPage] = useState("Home");
+
   // return (
   //   <HeaderContainer>
   //     <MenuContainer>
@@ -83,9 +85,7 @@ function Header() {
         <nav className="nav">
           <ul className="ul">
             {pages.map((page) => (
-              <NavLink key={page} to={page}>
-                <li key={page}>{page}</li>
-              </NavLink>
+              <li key={page}>{page}</li>
             ))}
           </ul>
         </nav>
@@ -93,4 +93,5 @@ function Header() {
     </HeaderContainer>
   );
 }
+
 export default Header;
