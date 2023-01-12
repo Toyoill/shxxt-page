@@ -15,7 +15,6 @@ import Header from "./Header/Header";
 //   zIndex: "1",
 // });
 
-
 function Layout() {
   return (
     <div>
