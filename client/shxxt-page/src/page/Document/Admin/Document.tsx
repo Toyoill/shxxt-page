@@ -60,11 +60,9 @@ export default function Document() {
   };
 
   const keyDownHandler = (e: React.KeyboardEvent) => {
-    if (e.key === "Tab" && !e.shiftKey) {
+    if (e.key === "Tab") {
       e.preventDefault();
-      const { value } = textareaRef.current!;
-      const { selectionStart } = textareaRef.current!;
-      const { selectionEnd } = textareaRef.current!;
+      const { value, selectionStart, selectionEnd } = textareaRef.current!;
       textareaRef.current!.value = `${value.substring(
         0,
         selectionStart
@@ -73,34 +71,6 @@ export default function Document() {
         selectionEnd + 2 - (selectionEnd - selectionStart);
       textareaRef.current!.selectionEnd =
         selectionEnd + 2 - (selectionEnd - selectionStart);
-    }
-    if (e.key === "Tab" && e.shiftKey) {
-      e.preventDefault();
-      const { value } = textareaRef.current!;
-      const { selectionStart } = textareaRef.current!;
-      const { selectionEnd } = textareaRef.current!;
-
-      const beforeStart = value
-        .substring(0, selectionStart)
-        .split("")
-        .reverse()
-        .join("");
-      const indexOfTab = beforeStart.indexOf("  ");
-      const indexOfNewline = beforeStart.indexOf("\n");
-
-      if (indexOfTab !== -1 && indexOfTab < indexOfNewline) {
-        textareaRef.current!.value =
-          beforeStart
-            .substring(indexOfTab + 2)
-            .split("")
-            .reverse()
-            .join("") +
-          beforeStart.substring(0, indexOfTab).split("").reverse().join("") +
-          value.substring(selectionEnd);
-
-        textareaRef.current!.selectionStart = selectionStart - 2;
-        textareaRef.current!.selectionEnd = selectionEnd - 2;
-      }
     }
   };
 
