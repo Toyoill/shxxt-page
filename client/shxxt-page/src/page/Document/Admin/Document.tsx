@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import EditBar from "./EditBar";
 import Sidebar from "../../../components/UI/Sidebar/Admin/SidebarWrapper";
 
@@ -86,8 +86,7 @@ export default function Document() {
                 return !inline && match ? (
                   <SyntaxHighlighter
                     language={match[1]}
-                    PreTag="div"
-                    style={coy}
+                    style={dracula}
                     {...props}
                   >
                     {String(children).replace(/\n$/, "")}
