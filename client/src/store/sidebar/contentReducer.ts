@@ -9,7 +9,18 @@ import saveDataAction from "./contentReducerActions/saveDataAction";
 import fetchData from "./contentReducerActions/fetchDataAction";
 
 const initialState: ContentState = {
-  contents: [],
+  contents: [
+    {
+      data: {
+        id: 1,
+        type: "SubHeading",
+        idx: 0,
+        title: "테스트",
+        belong: -1,
+      },
+      subHeadings: [],
+    },
+  ],
   newDatas: [],
   updatedDatas: [],
   contentId: 0,

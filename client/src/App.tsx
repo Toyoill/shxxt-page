@@ -27,6 +27,7 @@ function App() {
             <Route path="/Home" element={<MainPage />} />
             <Route path="/Guide" element={<GuidePage />} />
             <Route path="/Design" element={<DesignPage />} />
+            <Route path="/Design/:id" element={<DesignPage />} />
             <Route path="/Reference" element={<ReferencePage />} />
           </Route>
         </Routes>

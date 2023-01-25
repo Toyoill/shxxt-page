@@ -17,6 +17,10 @@ const MarkdownWrapper = styled.div`
   word-wrap: break-word;
 `;
 
+const MainContentContainer = styled.div({
+  paddingLeft: "15vw",
+});
+
 export default function ReferencePage() {
   const article = `Here is some JavaScript code:
   ~~~js
@@ -26,34 +30,36 @@ export default function ReferencePage() {
   return (
     <div>
       <Sidebar />
-      <MarkdownWrapper>
-        <div>
-          <ReactMarkdown
-            components={{
-              // eslint-disable-next-line react/no-unstable-nested-components
-              code({ node, inline, className, children, style, ...props }) {
-                const match = /language-(\w+)/.exec(className || "");
-                return !inline && match ? (
-                  <SyntaxHighlighter
-                    language={match[1]}
-                    PreTag="div"
-                    {...props}
-                  >
-                    {String(children).replace(/\n$/, "")}
-                  </SyntaxHighlighter>
-                ) : (
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                );
-              },
-            }}
-            unwrapDisallowed
-          >
-            {article}
-          </ReactMarkdown>
-        </div>
-      </MarkdownWrapper>
+      <MainContentContainer>
+        <MarkdownWrapper>
+          <div>
+            <ReactMarkdown
+              components={{
+                // eslint-disable-next-line react/no-unstable-nested-components
+                code({ node, inline, className, children, style, ...props }) {
+                  const match = /language-(\w+)/.exec(className || "");
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      language={match[1]}
+                      PreTag="div"
+                      {...props}
+                    >
+                      {String(children).replace(/\n$/, "")}
+                    </SyntaxHighlighter>
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                },
+              }}
+              unwrapDisallowed
+            >
+              {article}
+            </ReactMarkdown>
+          </div>
+        </MarkdownWrapper>
+      </MainContentContainer>
     </div>
   );
 }

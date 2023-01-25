@@ -11,7 +11,7 @@ const StyledContainer = styled.div({
 });
 
 const MainContentContainer = styled.div({
-  marginLeft: "15vw",
+  paddingLeft: "15vw",
 });
 
 function GuidePage() {
