@@ -45,7 +45,7 @@ export default function HeadingWrapper({
         defaultStyle={defaultStyle}
         longPressHandler={longPressHandler}
       >
-        <ClickWrapper onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} >
+        <ClickWrapper onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}>
           {children}
         </ClickWrapper>
       </LongPressWrapper>

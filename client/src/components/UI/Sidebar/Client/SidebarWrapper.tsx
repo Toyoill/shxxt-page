@@ -13,7 +13,7 @@ const SidebarContainer = styled.nav`
   position: fixed;
   top: 0;
   width: 15vw;
-  z-index: 9;
+  z-index: 0;
 `;
 
 export default function Sidebar() {

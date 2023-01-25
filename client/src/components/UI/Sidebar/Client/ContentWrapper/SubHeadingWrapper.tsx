@@ -17,10 +17,12 @@ const Wrapper = styled.li`
 export default function SubHeadingWrapper({ children }: Props) {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper onClick={()=>{
-      // /Admin/:content.data.id
-      console.log('click!')}
-    }>
+    <Wrapper
+      onClick={() => {
+        // /Admin/:content.data.id
+        console.log("click!");
+      }}
+    >
       <LongPressWrapper>{children}</LongPressWrapper>
     </Wrapper>
   );
