@@ -60,6 +60,10 @@ export default function SubHeadingWrapper({
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper>
       <div
+        onClick={()=>{
+          // /Admin/:content.data.id
+          console.log('click!')}
+        }
         onContextMenu={
           parentSelected ? parentContextHandler : contextMenuHandler
         }
