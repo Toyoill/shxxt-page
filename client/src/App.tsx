@@ -19,7 +19,6 @@ const MainContainer = styled.div({
 
 function App() {
   return (
-    // 최종 commit 전 되돌릴 코드
     <Provider store={store}>
       <MainContainer>
         <Routes>
@@ -36,13 +35,6 @@ function App() {
         <Route path="/Admin" element={<Document />} />
       </Routes>
     </Provider>
-    /*
-    <div>
-      <Sidebar />
-      <Document />
-      <Test />
-    </div>
-    */
   );
 }
 
