@@ -11,7 +11,8 @@ interface Props {
 }
 
 const Wrapper = styled.div`
-  border-radius: 5px;
+  border: 1px solid black;
+  border-radius: 10px;
   width: 100%;
   padding-block: 0.2rem;
 
@@ -45,7 +46,7 @@ export default function HeadingWrapper({
         defaultStyle={defaultStyle}
         longPressHandler={longPressHandler}
       >
-        <ClickWrapper onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} >
+        <ClickWrapper onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}>
           {children}
         </ClickWrapper>
       </LongPressWrapper>

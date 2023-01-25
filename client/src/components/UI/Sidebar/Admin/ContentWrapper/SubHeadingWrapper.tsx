@@ -20,13 +20,16 @@ interface Props {
 const Wrapper = styled.li`
   list-style: none;
 
-  & > div {
+  & > button {
+    border: none;
+    text-align: left;
+    background-color: white;
     border-radius: 5px;
     padding-block: 0.2rem;
     width: 100%;
   }
 
-  & > div:hover {
+  & > button:hover {
     background-color: #cfcfcf;
   }
 `;
@@ -59,17 +62,17 @@ export default function SubHeadingWrapper({
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper>
-      <div
-        onClick={()=>{
-          // /Admin/:content.data.id
-          console.log('click!')}
-        }
+      <button
+        type="button"
+        onClick={() => {
+          console.log(1);
+        }}
         onContextMenu={
           parentSelected ? parentContextHandler : contextMenuHandler
         }
       >
         {children}
-      </div>
+      </button>
     </Wrapper>
   );
 }

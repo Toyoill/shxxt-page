@@ -12,16 +12,34 @@ const Wrapper = styled.li`
   padding-block: 0.2rem;
   width: 100%;
   list-style: none;
+
+  & > button {
+    border: none;
+    text-align: left;
+    background-color: white;
+    border-radius: 5px;
+    padding-block: 0.2rem;
+    width: 100%;
+  }
+
+  & > button:hover {
+    background-color: #cfcfcf;
+  }
 `;
 
 export default function SubHeadingWrapper({ children }: Props) {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper onClick={()=>{
-      // /Admin/:content.data.id
-      console.log('click!')}
-    }>
-      <LongPressWrapper>{children}</LongPressWrapper>
+    <Wrapper>
+      <button
+        type="button"
+        onClick={() => {
+          // /Admin/:content.data.id
+          console.log("click!");
+        }}
+      >
+        <LongPressWrapper>{children}</LongPressWrapper>
+      </button>
     </Wrapper>
   );
 }
