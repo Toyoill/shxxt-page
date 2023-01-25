@@ -11,12 +11,11 @@ interface Props {
 }
 
 const Wrapper = styled.div`
-  border: 1px solid black;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100%;
-  padding-block: 0.2rem;
+  padding-block: 0.1rem;
 
-  & :hover {
+  :hover {
     background-color: #cfcfcf;
   }
 `;

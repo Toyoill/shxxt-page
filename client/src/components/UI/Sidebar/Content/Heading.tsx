@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 interface Props {
   title: string;
-  id?: number;
 }
 
 const StyledDiv = styled.div`
@@ -16,7 +15,6 @@ const StyledDiv = styled.div`
   }
 `;
 
-export default function Heading({ id, title }: Props) {
-  if (id) console.log(id);
+export default function Heading({ title }: Props) {
   return <StyledDiv>{title}</StyledDiv>;
 }

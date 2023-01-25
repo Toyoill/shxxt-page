@@ -8,9 +8,6 @@ interface Props {
 }
 
 const Wrapper = styled.li`
-  border-radius: 5px;
-  padding-block: 0.2rem;
-  width: 100%;
   list-style: none;
 
   & > button {

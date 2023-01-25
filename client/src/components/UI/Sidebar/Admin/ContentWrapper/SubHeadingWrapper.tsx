@@ -25,7 +25,7 @@ const Wrapper = styled.li`
     text-align: left;
     background-color: white;
     border-radius: 5px;
-    padding-block: 0.2rem;
+    padding-block: 0.4rem;
     width: 100%;
   }
 
