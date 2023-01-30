@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import SidebarInner from "./SidebarInner";
@@ -18,8 +19,11 @@ const SidebarContainer = styled.nav`
 
 export default function Sidebar() {
   return (
-    <SidebarContainer>
-      <SidebarInner />
-    </SidebarContainer>
+    <div>
+      <SidebarContainer>
+        <SidebarInner />
+      </SidebarContainer>
+      <Outlet />
+    </div>
   );
 }

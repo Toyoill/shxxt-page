@@ -18,6 +18,22 @@ const MainContentContainer = styled.div({
 export default function DesignPage() {
   const params = useParams();
 
+  if (params === null) {
+    return (
+      <StyledContainer>
+        <Sidebar />
+        <MainContentContainer>
+          <p>짱구야, 디자인 페이지 만들었다며.</p>
+          <img
+            src="https://pbs.twimg.com/media/FXXmyjrUIAUfXu1?format=jpg&name=medium"
+            alt=""
+          />
+          <strong>아빠를 또 속인거니?</strong>
+        </MainContentContainer>
+      </StyledContainer>
+    );
+  }
+
   return (
     <StyledContainer>
       <Sidebar />
