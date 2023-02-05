@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Example from "./Example";
+// import Example from "./Example";
+import DynamicExample from "./DynamicExample";
 import Button from "../../components/UI/Button";
 import Features from "./Feature";
 
@@ -43,7 +44,7 @@ export default function Content() {
     <ContentContainer>
       <BlueText>Shxxt-Maker</BlueText>
       <Info>데이터 관리를 더 쉽게.</Info>
-      <Example />
+      <DynamicExample />
       <Button title="Go to Admin" link="/Admin" />
       <GreyText>Features</GreyText>
       <Features />
