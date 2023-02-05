@@ -1,6 +1,5 @@
 import React, { MouseEvent, useEffect } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import List from "./List";
@@ -51,9 +50,7 @@ export default function SidebarInner() {
         parentContextHandler={() => {}}
         parentSelected={false}
       >
-        <NavLink to={`/Design/${content.data.id}`}>
-          <SubHeading>{content.data.title}</SubHeading>
-        </NavLink>
+        <SubHeading>{content.data.title}</SubHeading>
       </SubHeadingWrapper>
     );
   });

@@ -1,5 +1,6 @@
 import React, { MouseEvent } from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 import { useAppDispatch } from "../../../../../store/hooks";
 import { openContext } from "../../../../../store/sidebar/contextReducer";
@@ -64,14 +65,16 @@ export default function SubHeadingWrapper({
     <Wrapper>
       <button
         type="button"
-        onClick={() => {
-          console.log(1);
-        }}
         onContextMenu={
           parentSelected ? parentContextHandler : contextMenuHandler
         }
       >
-        {children}
+        <NavLink
+          style={{ textDecoration: "none" }}
+          to={`/Admin/${content.data.id}`}
+        >
+          {children}
+        </NavLink>
       </button>
     </Wrapper>
   );

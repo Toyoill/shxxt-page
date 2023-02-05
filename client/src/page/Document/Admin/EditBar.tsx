@@ -34,10 +34,22 @@ const SaveButton = styled.button`
   }
 `;
 
-export default function EditBar() {
+interface Props {
+  saving: boolean;
+  savingHandler: Function;
+}
+
+export default function EditBar({ saving, savingHandler }: Props) {
   return (
     <EditBarWrapper>
-      <SaveButton>저장하기</SaveButton>
+      <SaveButton
+        disabled={saving}
+        onClick={() => {
+          savingHandler();
+        }}
+      >
+        저장하기
+      </SaveButton>
     </EditBarWrapper>
   );
 }

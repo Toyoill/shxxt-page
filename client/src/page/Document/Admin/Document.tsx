@@ -1,9 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
+import { useParams } from "react-router";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import axios from "axios";
+
 import EditBar from "./EditBar";
 import Sidebar from "../../../components/UI/Sidebar/Admin/SidebarWrapper";
 
@@ -51,7 +54,35 @@ const MarkdownWrapper = styled.div`
 `;
 
 export default function Document() {
+  const { id } = useParams();
   const [article, setArticle] = useState("");
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (id === undefined) return;
+    axios.get(`http://localhost:4000/ref/article/${id}`).then((result) => {
+      const { main } = JSON.parse(result.data);
+      setArticle(main || "");
+    });
+  }, [id]);
+
+  const savingHandler = () => {
+    setSaving(true);
+    axios
+      .post(`http://localhost:4000/ref/article/${id}`, {
+        contentId: id,
+        main: article,
+      })
+      .then(() => {
+        alert("success");
+      })
+      .catch(() => {
+        alert("fail");
+      })
+      .finally(() => {
+        setSaving(false);
+      });
+  };
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -85,7 +116,7 @@ export default function Document() {
           placeholder="내용을 입력해주세요"
           value={article}
         />
-        <EditBar />
+        <EditBar saving={saving} savingHandler={savingHandler} />
       </EditerWrapper>
       <MarkdownWrapper>
         <div>

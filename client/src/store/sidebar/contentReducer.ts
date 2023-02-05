@@ -10,16 +10,16 @@ import fetchData from "./contentReducerActions/fetchDataAction";
 
 const initialState: ContentState = {
   contents: [
-    {
-      data: {
-        id: 1,
-        type: "SubHeading",
-        idx: 0,
-        title: "테스트",
-        belong: -1,
-      },
-      subHeadings: [],
-    },
+    // {
+    //   data: {
+    //     id: 1,
+    //     type: "SubHeading",
+    //     idx: 0,
+    //     title: "테스트",
+    //     belong: -1,
+    //   },
+    //   subHeadings: [],
+    // },
   ],
   newDatas: [],
   updatedDatas: [],
@@ -39,6 +39,7 @@ export const contentSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchData.fulfilled, (state, action) => {
       [state.contentId] = action.payload;
+      state.contentId += 100;
       const newContents: Array<Content> = [];
 
       action.payload[1].forEach((data: Data) => {
