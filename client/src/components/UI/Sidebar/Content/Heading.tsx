@@ -9,6 +9,8 @@ const StyledDiv = styled.div`
   cursor: pointer;
   display: inline-block;
   font-size: 1rem;
+  color: black;
+  text-decoration: none;
 
   &:hover {
     text-decoration: underline;

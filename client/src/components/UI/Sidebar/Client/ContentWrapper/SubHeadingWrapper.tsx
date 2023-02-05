@@ -28,13 +28,7 @@ export default function SubHeadingWrapper({ children }: Props) {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper>
-      <button
-        type="button"
-        onClick={() => {
-          // /Admin/:content.data.id
-          console.log("click!");
-        }}
-      >
+      <button type="button">
         <LongPressWrapper>{children}</LongPressWrapper>
       </button>
     </Wrapper>

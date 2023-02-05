@@ -37,6 +37,7 @@ function App() {
         </Routes>
       </MainContainer>
       <Routes>
+        <Route path="/Admin/:id" element={<Document />} />
         <Route path="/Admin" element={<Document />} />
       </Routes>
     </Provider>

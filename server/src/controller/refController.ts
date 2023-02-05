@@ -37,6 +37,9 @@ export async function postChanges(req: Request, res: Response) {
         await pool
           .query("DELETE FROM content_menu WHERE id = $1", [data.id])
           .catch((err) => console.log(err));
+        await pool
+          .query("DELETE FROM article WHERE content_id = $1", [data.id])
+          .catch((err) => console.log(err));
         continue;
       }
 
@@ -70,4 +73,30 @@ export async function postChanges(req: Request, res: Response) {
     res.status(400).send("UPDATEERR");
   }
   res.status(200).end();
+}
+
+export function getArticle(req: Request, res: Response) {
+  pool
+    .query("SELECT * FROM article WHERE content_id = $1", [
+      req.params.contentId,
+    ])
+    .then((result) => {
+      if (result.rows[0] !== undefined)
+        res.json(JSON.stringify(result.rows[0]));
+      else res.json(JSON.stringify(""));
+    });
+}
+
+export function postArticle(req: Request, res: Response) {
+  pool
+    .query("INSERT INTO article (content_id, main) VALUES ($1, $2)", [
+      req.params.contentId,
+      req.body.main,
+    ])
+    .then(() => {
+      res.status(200).end();
+    })
+    .catch(() => {
+      res.status(400).end();
+    });
 }

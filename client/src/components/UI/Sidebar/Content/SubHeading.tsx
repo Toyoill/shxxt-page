@@ -8,10 +8,12 @@ interface Props {
 
 const StyledDiv = styled.div<{ canClick: boolean }>`
   cursor: pointer;
+  color: black;
   font-size: 0.9rem;
   margin-left: 0.5rem;
   pointer-events: ${(props) => (props.canClick ? "true" : "false")};
   list-style-type: none;
+  text-decoration: none;
 
   &:hover {
     text-decoration: underline;
