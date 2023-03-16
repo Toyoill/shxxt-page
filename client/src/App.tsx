@@ -29,10 +29,9 @@ function App() {
             <Route element={<Sidebar />}>
               <Route path="/Guide" element={<Navigate to="/Guide/Upload" />} />
               <Route path="/Guide/*" element={<GuidePage />} />
-              <Route path="/Design" element={<DesignPage />} />
-              <Route path="/Design/:id" element={<DesignPage />} />
               <Route path="/Reference" element={<ReferencePage />} />
             </Route>
+            <Route path="/Design" element={<DesignPage />} />
           </Route>
         </Routes>
       </MainContainer>
