@@ -1,6 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import TestButton from "./TestButton";
+import {
+  FormatAlignJustify,
+  FormatAlignCenter,
+  FormatAlignLeft,
+  FormatAlignRight,
+  FormatBold,
+  FormatItalic,
+  FormatUnderlined,
+} from "@mui/icons-material";
+import DesignBarButton from "./DesignBarButton";
+import FontSelectButton from "./FontSelectButton";
 
 const Bar = styled.div`
   align-items: center;
@@ -18,7 +28,28 @@ const Bar = styled.div`
 export default function DesignBar() {
   return (
     <Bar>
-      <TestButton />
+      <DesignBarButton>
+        <FormatAlignJustify fontSize="inherit" />
+      </DesignBarButton>
+      <DesignBarButton>
+        <FormatAlignLeft fontSize="inherit" />
+      </DesignBarButton>
+      <DesignBarButton>
+        <FormatAlignCenter fontSize="inherit" />
+      </DesignBarButton>
+      <DesignBarButton>
+        <FormatAlignRight fontSize="inherit" />
+      </DesignBarButton>
+      <DesignBarButton>
+        <FormatBold fontSize="inherit" />
+      </DesignBarButton>
+      <DesignBarButton>
+        <FormatItalic fontSize="inherit" />
+      </DesignBarButton>
+      <DesignBarButton>
+        <FormatUnderlined fontSize="inherit" />
+      </DesignBarButton>
+      <FontSelectButton />
     </Bar>
   );
 }

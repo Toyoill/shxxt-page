@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 const Button = styled.button`
@@ -22,6 +22,12 @@ const Button = styled.button`
   }
 `;
 
-export default function TestButton() {
-  return <Button>버튼</Button>;
+interface DesignBarbuttonPropsType {
+  children: ReactNode;
+}
+
+export default function DesignBarButton({
+  children,
+}: DesignBarbuttonPropsType) {
+  return <Button>{children}</Button>;
 }
